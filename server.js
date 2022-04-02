@@ -22,7 +22,7 @@ app.get('/', function(req, res){
     });
 
     //Apply the routes to the app
-    app.use(/'admin', adminRouter);
+    app.use('/admin', adminRouter);
     
 });
 //Start server
