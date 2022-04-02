@@ -14,7 +14,7 @@ app.get('/', function(req, res){
 var adminRouter = express.Router();
 //admin main page. the dashboard (http://locahost:PORT/admin)
 adminRouter.get('/', function(req, res){
-    res.send('I am the dashboard');
+    res.sendFile(__dirname + '/login.html');
 });
 //users page(http://localhost:Port/admin/users)
 adminRouter.get('/users', function(req, res){
