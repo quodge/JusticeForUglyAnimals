@@ -27,6 +27,15 @@ adminRouter.get('/posts', function(req, res){
 
 //Apply the routes to the app
 app.use('/admin', adminRouter);
+
+
+//Middleware
+adminRouter.use(function(req, res, next){
+    //log each request to the console
+    console.log(req.method, req.url);
+    //Continue to next part and go to route
+    next();});
+
 //Start server
 app.listen(PORT);
 console.log('Express Server running at http://127.0.0.1:'.PORT);
