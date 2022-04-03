@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 8080;
 //set port based on environment
 var port = PORT;
 
-app.route('/login')
+app.route('/admin')
     .get(function(req, res) {    
         var output = 'getting the login! ';
         var input1 = req.query['input1'];
