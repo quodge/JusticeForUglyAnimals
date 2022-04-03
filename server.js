@@ -4,11 +4,23 @@ var app = express();
 const PORT = process.env.PORT || 8080;
 //set port based on environment
 var port = PORT;
+
+app.route('/login')
+    .get(function(req, res) {    
+        var output = 'getting the login! ';
+        var input1 = req.query['input1'];
+        var input2 = req.query['input2'];
+        console.log('The params:'+ req.query.input1 + " " + req.query.input2);
+        
+    });
+
 //send index.html file to the user for the home page
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
     
 });
+
+
 
 //create routes for admin section
 var adminRouter = express.Router();
