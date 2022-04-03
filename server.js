@@ -34,10 +34,10 @@ adminRouter.get('/', function(req, res){
 });
 //users page(http://localhost:Port/admin/users)
 adminRouter.get('/users', function(req, res){
-    //res.send('I show all the users!');
+    res.send('I show all the users!');
     var output = 'getting the login! ';
-    var input1 = req.query['input1'];
-    var input2 = req.query['input2'];
+    var input1 = req.query.input1;
+    var input2 = req.query.input2;
     console.log('The params:'+ req.query.input1 + " " + req.query.input2);
 });
 //posts page (http://localhost:PORT/admin/posts)
