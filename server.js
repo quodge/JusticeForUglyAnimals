@@ -6,13 +6,13 @@ const PORT = process.env.PORT || 8080;
 var port = PORT;
 
 //MongoDB
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb://127.0.0.1:27017"
-MongoClient.connect(uri, function (err, db){
-    if(err) throw err;
-    console.log('Start the database stuff');
+//const MongoClient = require('mongodb').MongoClient;
+//const uri = "mongodb://127.0.0.1:27017"
+//MongoClient.connect(uri, function (err, db){
+//    if(err) throw err;
+//    console.log('Start the database stuff');
     //Write database insert/ update/ query code here
-})
+//})
 
 
 
