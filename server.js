@@ -18,18 +18,18 @@ var port = PORT;
 
 
 
-//app.route('/login')
- //   .get(function(req, res) {    
-//        var output = 'getting the login! ';
-//        var input1 = req.query['input1'];
-//        var input2 = req.query['input2'];
-//        console.log('The params:'+ req.query.input1 + " " + req.query.input2);
- //       
- //   })
- //   // process the form (POST http://localhost:PORT/login)
- //   .post(function(req, res) { console.log('processing');
- //   res.send('processing the login form!');
-//  });
+app.route('/login')
+    .get(function(req, res) {    
+       var output = 'getting the login! ';
+       var input1 = req.query['input1'];
+       var input2 = req.query['input2'];
+       console.log('The params:'+ req.query.input1 + " " + req.query.input2);
+       
+   })
+   // process the form (POST http://localhost:PORT/login)
+   .post(function(req, res) { console.log('processing');
+   res.send('processing the login form!');
+ });
 
 //send index.html file to the user for the home page
 app.get('/', function(req, res){
