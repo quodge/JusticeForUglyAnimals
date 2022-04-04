@@ -32,7 +32,8 @@ app.get('/', function(req, res){
 });
 
 app.route('/login')
-    .get(function(req, res) {    
+    .get(function(req, res) {
+        res.send('This is the login page')    
        var output = 'getting the login! ';
        var input1 = req.query.input1;
        var input2 = req.query.input2;
