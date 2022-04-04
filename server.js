@@ -33,13 +33,11 @@ app.route('/login')
        var input2 = req.query.input2;
        console.log('The params:'+ req.query.input1 + " " + req.query.input2);
       
-    res.send('Login Page working')
+    //res.send('Login Page working')
    })
    // process the form (POST http://localhost:PORT/login)
    .post(function(req, res) { console.log('processing');
-   
-        
-        res.send('processing the login form!');
+   res.send('processing the login form!');
  });
 
 //create routes for admin section
