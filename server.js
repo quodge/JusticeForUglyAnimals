@@ -18,6 +18,14 @@ var port = PORT;
 
 
 
+
+
+//send index.html file to the user for the home page
+app.get('/', function(req, res){
+    res.sendFile(__dirname + '/index.html');
+    
+});
+
 app.route('/login')
     .get(function(req, res) {    
        var output = 'getting the login! ';
@@ -30,14 +38,6 @@ app.route('/login')
    .post(function(req, res) { console.log('processing');
    res.send('processing the login form!');
  });
-
-//send index.html file to the user for the home page
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/index.html');
-    
-});
-
-
 
 //create routes for admin section
 var adminRouter = express.Router();
