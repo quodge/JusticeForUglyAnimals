@@ -2,6 +2,7 @@
 var express = require('express');
 var app = express();
 const PORT = process.env.PORT || 8080;
+const bodyParser = require('body-parser');
 //set port based on environment
 var port = PORT;
 
