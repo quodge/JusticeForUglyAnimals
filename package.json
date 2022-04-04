@@ -9,7 +9,17 @@
   },
   "author": "Scott",
   "dependencies": {
-    "express": "~4.13.4"
+    "express": "~4.13.4",
+    "mongodb": "^4.4.1"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quodge/JusticeForUglyAnimals.git"
+  },
+  "bugs": {
+    "url": "https://github.com/quodge/JusticeForUglyAnimals/issues"
+  },
+  "homepage": "https://github.com/quodge/JusticeForUglyAnimals#readme"
 }
