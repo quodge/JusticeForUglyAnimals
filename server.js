@@ -5,14 +5,18 @@ const PORT = process.env.PORT || 8080;
 //set port based on environment
 var port = PORT;
 
-// //MongoDB
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb://127.0.0.1:27017"
-// MongoClient.connect(uri, function (err, db){
-//    if(err) throw err;
-//    console.log('Start the database stuff');
-//     //Write database insert/ update/ query code here
-// })
+const { MongoClient } = require('mongodb');
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  collection.insertOne({email: "test@test.com", password: "password"}, function(err, res){
+      if (err) throw err;
+        console.log("Record added");
+  })
+  // perform actions on the collection object
+  //client.close();
+});
 
 
 
