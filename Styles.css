@@ -1,0 +1,118 @@
+body{
+    margin: 0;
+    background: #222;
+  
+  }
+  
+  
+  .container{
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  /* Header CSS code*/
+  header{
+    background: white;
+    font-size: 16;
+    
+  }
+
+  .NavBarTitle{
+    color:purple;
+    font-size: 50;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-decoration: none;
+    
+  }
+
+  button{
+    /* text-align: center; */
+    margin-left:50%;
+    background-color: purple;
+    outline-color: purple;
+    border-radius: 10px;
+    border-color: white;
+    color:white;
+    width:100px;
+    height:50px;
+    font-size: 20px;
+    border-top: 0;
+  }
+
+  
+  nav{
+    float:right;
+  }
+  
+  header::after{
+    content:"";
+    display:table;
+    clear:both;
+  }
+  
+  header nav ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+  }
+  
+  header nav li{
+    display: inline-block;
+    margin-left:30px;
+    padding-top: 30px;
+  
+    position: relative;
+  
+  }
+  
+  header nav a{
+    color:purple;
+    text-decoration: none;
+    text-transform: uppercase;
+  
+  
+  }
+  header nav a:hover{
+    color: purple;
+  }
+  
+  header nav a::before{
+    content: '';
+    display:block;
+    height:5px;
+    background-color: purple;
+    top: 0;
+    width:0%;
+  
+    transition: all ease-in-out 250ms;
+  }
+  
+  header nav a:hover::before{
+    width:100%;
+  }
+  
+  /* Footer CSS */
+  
+  footer .navbar {
+    background-color: purple;
+    overflow: hidden;
+    position: bottom;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  footer .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  footer .navbar a:hover {
+    background-color: white;
+    color: purple;
+  }
+  
+  
