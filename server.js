@@ -50,7 +50,7 @@ app.route('/login')
 var adminRouter = express.Router();
 //admin main page. the dashboard (http://locahost:PORT/admin)
 adminRouter.get('/', function(req, res){
-    res.sendFile(__dirname + '/login.html');
+    res.sendFile(__dirname + '/admin.html');
 });
 //users page(http://localhost:Port/admin/users)
 adminRouter.get('/users', function(req, res){
@@ -75,6 +75,23 @@ adminRouter.use(function(req, res, next){
     console.log(req.method, req.url);
     //Continue to next part and go to route
     next();});
+
+
+
+//Comments page
+var commentsRouter = express.Router();
+commentsRouter.get('/', function(req, res){
+    res.sendFile(__dirname + '/Comments.html');
+});
+
+app.use('/comments', commentsRouter);
+
+var eventsRouter = express.Router();
+eventsRouter.get('/', function(req, res){
+    res.sendFile(__dirname + '/Events.html')
+});
+
+app.use('/events', eventsRouter);
 
 //Start server
 app.listen(PORT);
