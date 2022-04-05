@@ -31,20 +31,20 @@ app.get('/', function(req, res){
     
 });
 
-// app.route('/login')
-//     .get(function(req, res) {
-//         res.send('This is the login page')    
-//        var output = 'getting the login! ';
-//        var input1 = req.query.input1;
-//        var input2 = req.query.input2;
-//        console.log('The params:'+ req.query.input1 + " " + req.query.input2);
+app.route('/login-process')
+    .get(function(req, res) {
+        res.send('This is the login page')    
+       var output = 'getting the login! ';
+       var input1 = req.query.input1;
+       var input2 = req.query.input2;
+       console.log('The params:'+ req.query.input1 + " " + req.query.input2);
       
-//     //res.send('Login Page working')
-//    })
-//    // process the form (POST http://localhost:PORT/login)
-//    .post(function(req, res) { console.log('processing');
-//    res.send('processing the login form!');
-//  });
+    //res.send('Login Page working')
+   })
+   // process the form (POST http://localhost:PORT/login)
+   .post(function(req, res) { console.log('processing');
+   res.send('processing the login form!');
+ });
 
 //create routes for admin section
 var adminRouter = express.Router();
