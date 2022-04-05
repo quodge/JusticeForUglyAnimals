@@ -83,15 +83,33 @@ var commentsRouter = express.Router();
 commentsRouter.get('/', function(req, res){
     res.sendFile(__dirname + '/Comments.html');
 });
-
 app.use('/comments', commentsRouter);
 
 var eventsRouter = express.Router();
 eventsRouter.get('/', function(req, res){
     res.sendFile(__dirname + '/Events.html')
 });
-
 app.use('/events', eventsRouter);
+
+var settingsRouter = express.Router();
+settingsRouter.get('/', function(req, res){
+    res.sendFile(__dirname + '/Settings.html')
+});
+app.use('/settings', eventsRouter);
+
+var loginRouter = express.Router();
+loginRouter.get('/', function(req, res){
+    res.sendFile(__dirname + '/login.html')
+});
+app.use('/login', loginRouter);
+
+
+var registerRouter = express.Router();
+registerRouter.get('/', function(req, res){
+    res.sendFile(__dirname + '/Register.html')
+});
+app.use('/register', registerRouter);
+
 
 //Start server
 app.listen(PORT);
