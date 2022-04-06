@@ -33,7 +33,7 @@ app.get('/', function(req, res){
 
 app.route('/login-process')
     .get(function(req, res) {
-        res.send('This is the login page')    
+        res.send('Processing login')    
        var output = 'getting the login! ';
        var input1 = req.query.input1;
        var input2 = req.query.input2;
