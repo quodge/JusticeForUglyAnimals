@@ -50,7 +50,7 @@ body{
   }
 
   input[type= "submit"], button{
-    /* text-align: center; */
+    text-align: center;
     /* margin-left:45%; */
     align-items: center;
     background-color: purple;
