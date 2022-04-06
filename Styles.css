@@ -27,7 +27,8 @@ body{
 
   button{
     /* text-align: center; */
-    margin-left:45%;
+    /* margin-left:45%; */
+    align-items: center;
     background-color: purple;
     outline-color: purple;
     border-radius: 10px;
