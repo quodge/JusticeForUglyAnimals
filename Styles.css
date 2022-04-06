@@ -62,6 +62,7 @@ body{
     height:50px;
     font-size: 20px;
     border-top: 0;
+    cursor: pointer;
   }
 
   form{
