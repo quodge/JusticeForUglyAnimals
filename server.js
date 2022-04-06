@@ -116,7 +116,11 @@ cssRouter.get('/', function(req, res){
 });
 app.use('/styles', cssRouter);
 
-
+var imageRouter = express.Router();
+imageRouter.get('/buffalo', function(req, res){
+    res.sendFile(__dirname + '/images/Buffalo.jpg')
+});
+app.use('/images', imageRouter);
 
 //Start server
 app.listen(PORT);
