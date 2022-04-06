@@ -39,7 +39,9 @@ body{
     border-top: 0;
   }
 
-  
+  form{
+    margin-left:50%;
+  }
   nav{
     float:right;
   }
