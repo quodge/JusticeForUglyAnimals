@@ -120,6 +120,22 @@ var imageRouter = express.Router();
 imageRouter.get('/buffalo', function(req, res){
     res.sendFile(__dirname + '/images/Buffalo.jpg')
 });
+imageRouter.get('/image1', function(req, res){
+    res.sendFile(__dirname + '/images/photo1.jpg')
+});
+imageRouter.get('/image2', function(req, res){
+    res.sendFile(__dirname + '/images/photo2.jpg')
+});
+imageRouter.get('/image3', function(req, res){
+    res.sendFile(__dirname + '/images/photo3.jpg')
+});
+imageRouter.get('/image4', function(req, res){
+    res.sendFile(__dirname + '/images/photo4.jpg')
+});
+imageRouter.get('/image5', function(req, res){
+    res.sendFile(__dirname + '/images/photo5.jpg')
+});
+
 app.use('/images', imageRouter);
 
 //Start server
