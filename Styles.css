@@ -24,7 +24,7 @@ body{
   }
 
   textarea{
-    height: 40px;
+    height: 20px;
     width: 100%;
     border: none;
     border-bottom: 2px solid gray;
@@ -49,7 +49,7 @@ body{
     
   }
 
-  button{
+  input[type= "submit"], button{
     /* text-align: center; */
     /* margin-left:45%; */
     align-items: center;
