@@ -123,10 +123,6 @@
     </Style>
 
 
-
-
-
-
 </head>
 <body>
 
@@ -144,7 +140,74 @@
         </div>
 
 
-Register
+
+        <body onload="makeRequest();">
+
+            <script>
+                  var req;
+            
+                function makeRequest() {
+                if (window.XMLHttpRequest) {
+                    req = new XMLHttpRequest();
+                }
+                else if (window.ActiveXObject) {
+                    req = new ActiveXObject("Msxml2.XMLHTTP");
+                }
+                else {
+                    // Ajax not supported
+                        return;
+                }
+            
+                    req.onreadystatechange = function() {
+                    var txt = "";
+                if (this.readyState == 4 && this.status == 200) {
+                        var response = this.responseText;
+                        console.log (response);
+                 document.getElementById("answer").innerHTML = response;
+                }
+                };
+            
+            }
+            
+                function registerFunction() {
+                    firstname = document.getElementById ("firstname").value;
+                    surname = document.getElementById ("surname").value;
+                    email = document.getElementById ("email").value;
+                    username = document.getElementById ("username").value;
+                    password = document.getElementById ("password").value;
+                    password2 = document.getElementById ("password2").value;
+            
+                  req.open("GET", "/login-process?firstname=" + firstname + "&surname=" + surname, true);
+                    req.send();
+                    //var params = 'input1=' + input1 + '&input2=' + input2;
+                    //req.open('POST', '/login?', true);
+                    //req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    //req.send(params);
+            
+                }
+            </script>
+            <form>
+            <p>First Name       <input type = "text" id = "firstname"></input></p>
+            <p>Surname          <input type = "text" id = "surname"></input></p>
+            <p>Email            <input type = "text" id = "email"></input></p>
+            <p>Username         <input type = "text" id = "username"></input></p>
+            <p>Password         <input type = "text" id = "password"></input></p>
+            <p>Confirm Password <input type = "text" id = "password2"></input></p>
+            
+            
+            <!-- <h1>Response</h1> -->
+            
+            <p id="answer"></p>
+            
+            <input type = "button" value = "Register" onclick = "registerFunction();" />
+            
+            </form>
+
+
+
+
+
+
 
 <footer>
     <div class="navbar">

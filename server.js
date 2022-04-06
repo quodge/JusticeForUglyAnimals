@@ -46,6 +46,22 @@ app.route('/login-process')
    res.send('processing the login form!');
  });
 
+app.route('/register-process')
+    .get(function(req, res){
+        res.send('Processing registration')
+        var output = 'Getting register details';
+        var firstname = req.query.firstname;
+        var surname = req.query.surname;
+        console.log('First and surname are ' + req.query.firstname + " " + req.query.surname);
+    })
+    .post(function(req, res) { console.log('processing');
+    res.send('processing the registration form!');
+ });
+
+
+
+
+
 //create routes for admin section
 var adminRouter = express.Router();
 //admin main page. the dashboard (http://locahost:PORT/admin)
