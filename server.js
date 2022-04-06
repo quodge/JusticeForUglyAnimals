@@ -95,7 +95,7 @@ var settingsRouter = express.Router();
 settingsRouter.get('/', function(req, res){
     res.sendFile(__dirname + '/Settings.html')
 });
-app.use('/settings', eventsRouter);
+app.use('/settings', settingsRouter);
 
 var loginRouter = express.Router();
 loginRouter.get('/', function(req, res){
