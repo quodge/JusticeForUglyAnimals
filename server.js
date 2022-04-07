@@ -1,5 +1,7 @@
 //load express and create app
 var express = require('express');
+const session = require('express-session');
+const {v4:uuidv4} = require('uuid');
 var app = express();
 const PORT = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
@@ -21,7 +23,15 @@ client.connect(err => {
 });
 
 
-
+app.use(session({
+    genid: function(req){
+        return uuidv4();
+    },
+    secret: '=fmLV*U@FL`N]]~/zqtFCch.pBTGoU',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }
+}));
 
 
 
@@ -55,15 +65,18 @@ app.get('/login', function(req, res) {
        .matches('[A-Z]').withMessage('Password must contain an uppercase letter')];
    // process the form (POST http://localhost:PORT/login)
    app.post('/login', (req, res) => {
-        const errors = validationResult(req);
-        if(!errors.isEmpty()){
-            return res.status(422).json({errors:errors.array()});
-        }
-        else{
-            let username = req.body.username;
-            let password = req.body.password;
-            res.send('Username:' + username + 'Password:' + password);
-        }
+
+    req.session.username = req.body.username;
+    res.send(`Hello ${req.session.username}. Your session ID is ${req.sessionID} and session expires in ${req.session.cookie.maxAge} milliseconds. `);
+        // const errors = validationResult(req);
+        // if(!errors.isEmpty()){
+        //     return res.status(422).json({errors:errors.array()});
+        // }
+        // else{
+        //     let username = req.body.username;
+        //     let password = req.body.password;
+        //     res.send('Username:' + username + 'Password:' + password);
+        // }
  });
 
 // app.route('/register-process')
