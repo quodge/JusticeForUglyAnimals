@@ -110,7 +110,7 @@ app.get('/login', function(req, res) {
 var adminRouter = express.Router();
 //admin main page. the dashboard (http://locahost:PORT/admin)
 adminRouter.get('/', function(req, res){
-    res.sendFile(__dirname + '/admin.html');
+    res.sendFile(__dirname + '/Admin.html');
 });
 //users page(http://localhost:Port/admin/users)
 adminRouter.get('/users', function(req, res){
@@ -121,8 +121,8 @@ adminRouter.get('/users', function(req, res){
     // console.log('The params:'+ req.query.input1 + " " + req.query.input2);
 });
 //posts page (http://localhost:PORT/admin/posts)
-adminRouter.get('/posts', function(req, res){
-    res.send('I show all the posts!'); 
+adminRouter.get('/comments', function(req, res){
+    res.send('I show all the comments'); 
 });
 
 //Apply the routes to the app
@@ -148,7 +148,9 @@ const db = client.db("LFTU");
 var cursor = db.collection('comments').find({});
 
 function iterateFunc(doc){
-  //console.log(JSON.stringify(doc, null, 4));
+  var comments = JSON.stringify(doc, null, 4);
+  res.send(comments);
+    //console.log(JSON.stringify(doc, null, 4));
   
 }
 
