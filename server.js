@@ -30,19 +30,19 @@ client.connect(err => {
 });
 
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
-app.use(session({
-    genid: function(req){
-        return uuidv4();
-    },
-    secret: '=fmLV*U@FL`N]]~/zqtFCch.pBTGoU',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 }
-}));
+// app.use(session({
+//     genid: function(req){
+//         return uuidv4();
+//     },
+//     secret: '=fmLV*U@FL`N]]~/zqtFCch.pBTGoU',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { maxAge: 60 * 60 * 1000 }
+// }));
 
 
 
