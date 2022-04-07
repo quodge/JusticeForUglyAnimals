@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 //set port based on environment
 var port = PORT;
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 const { MongoClient } = require('mongodb');
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
