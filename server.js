@@ -51,7 +51,7 @@ client.connect(err => {
 
 //send index.html file to the user for the home page
 app.get('/', function(req, res){
-    res.sendFile(__dirname + 'views/pages/index.html');
+    res.sendFile(__dirname + 'views/pages/index.ejs');
     
 });
 
