@@ -147,8 +147,7 @@ const comment = mongoose.model('Comment', commentsSchema);
 
 //Comments page
 // var commentsRouter = express.Router();
-app.route('/comments')
-.get(function(req, res){
+app.get('/comments' ,(req, res) => {
     comment.find({}, function(err, comments){
         res.render('pages/Comments', {
             commentsList: comments
