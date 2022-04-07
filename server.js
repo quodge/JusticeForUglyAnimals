@@ -144,7 +144,13 @@ adminRouter.use(function(req, res, next){
 // var commentsRouter = express.Router();
 app.route('/comments')
 .get(function(req, res){
-    var comments = JSON.stringify(doc, null, 4);
+    function iterateFunc(doc){
+        var comments = JSON.stringify(doc, null, 4);
+  
+        //console.log(JSON.stringify(doc, null, 4));
+      
+    }
+    
     res.render('pages/Comments', {
         comments: comments
     });
@@ -152,12 +158,7 @@ app.route('/comments')
 const db = client.db("LFTU");
 var cursor = db.collection('comments').find({});
 
-function iterateFunc(doc){
-  
-  //res.send(comments);
-    //console.log(JSON.stringify(doc, null, 4));
-  
-}
+
 
 function errorFunc(error){
   console.log(error);
