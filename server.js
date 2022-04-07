@@ -99,6 +99,23 @@ adminRouter.use(function(req, res, next){
 app.route('/comments')
 .get(function(req, res){
     res.sendFile(__dirname + '/Comments.html');
+    
+const db = client.db("LFTU");
+var cursor = db.collection('comments').find({});
+
+function iterateFunc(doc){
+  console.log(JSON.stringify(doc, null, 4));
+}
+
+function errorFunc(error){
+  console.log(error);
+}
+cursor.forEach(iterateFunc, errorFunc);
+
+
+
+
+
 })
 .post(function(req, res){
     console.log(req.body);
