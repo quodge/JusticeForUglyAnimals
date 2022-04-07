@@ -30,7 +30,7 @@ client.connect(err => {
   // perform actions on the collection object
   //client.close();
 });
-mongoose.connect('mongodb+srv://Admin:password@cluster0.zbm5y.mongodb.net/LFTU?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://Admin:password@cluster0.zbm5y.mongodb.net/LFTU?retryWrites=true&w=majority');
 
 
 // app.use(passport.initialize());
