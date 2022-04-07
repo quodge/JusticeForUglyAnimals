@@ -145,7 +145,7 @@ adminRouter.use(function(req, res, next){
 app.route('/comments')
 .get(function(req, res){
     function iterateFunc(doc){
-        var comments = JSON.stringify(doc, null, 4);
+        const comments = JSON.stringify(doc, null, 4);
   
         //console.log(JSON.stringify(doc, null, 4));
       
