@@ -104,7 +104,8 @@ const db = client.db("LFTU");
 var cursor = db.collection('comments').find({});
 
 function iterateFunc(doc){
-  console.log(JSON.stringify(doc, null, 4));
+  //console.log(JSON.stringify(doc, null, 4));
+  res.send(JSON.stringify(doc, null, 4));
 }
 
 function errorFunc(error){
