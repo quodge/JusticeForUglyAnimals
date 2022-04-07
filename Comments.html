@@ -182,23 +182,7 @@
 
 
 </script>
-<script>
-const db = client.db("LFTU");
-var cursor = db.collection('comments').find({});
 
-function iterateFunc(doc){
-  console.log(JSON.stringify(doc, null, 4));
-}
-
-function errorFunc(error){
-  console.log(error);
-}
-cursor.forEach(iterateFunc, errorFunc);
-
-
-
-
-</script>
 <footer>
     <div class="navbar">
       <a class="active" href="https://whispering-earth-86255.herokuapp.com/">Home</a>
