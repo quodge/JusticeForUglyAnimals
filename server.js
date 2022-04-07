@@ -1,12 +1,12 @@
 //load express and create app
 var express = require('express');
 //Session tokens imports 
-const session = require('express-session');
-const {v4:uuidv4} = require('uuid');
-const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
-const passport = require('passport');
-const connectEnsureLogin = require('connect-ensure-login');
+//const session = require('express-session');
+//const {v4:uuidv4} = require('uuid');
+//const mongoose = require('mongoose');
+//const passportLocalMongoose = require('passport-local-mongoose');
+//const passport = require('passport');
+//const connectEnsureLogin = require('connect-ensure-login');
 
 
 var app = express();
