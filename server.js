@@ -144,13 +144,10 @@ adminRouter.use(function(req, res, next){
 // var commentsRouter = express.Router();
 app.route('/comments')
 .get(function(req, res){
-    function iterateFunc(doc){
-        const comments = JSON.stringify(doc, null, 4);
-  
-        //console.log(JSON.stringify(doc, null, 4));
-      
-    }
     
+    var comments = ["This is a long comment kadsjicodoejfjnfdjncsfdjkndcskmdsklmdfklmfdkjnfnjipfvnj njofnopjvonjfvon njfvnno njornvopjnjonfovno njfonjvonj gnojrvnjg nj",
+"This is shorter", "jifkjfdajilnjifvnjifnji"];
+  
     res.render('pages/Comments', {
         comments: comments
     });
@@ -160,10 +157,7 @@ var cursor = db.collection('comments').find({});
 
 
 
-function errorFunc(error){
-  console.log(error);
-}
-cursor.forEach(iterateFunc, errorFunc);
+
 
 
 
