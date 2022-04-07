@@ -108,7 +108,7 @@ app.route('/comments')
         if (err) throw err;
         console.log("Comment added");
     })
-    res.redirect("/");
+    res.redirect("/comments");
 });
 // app.use('/comments', commentsRouter);
 
