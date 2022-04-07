@@ -95,8 +95,9 @@ adminRouter.use(function(req, res, next){
 
 
 //Comments page
-var commentsRouter = express.Router();
-commentsRouter.get('/', function(req, res){
+// var commentsRouter = express.Router();
+app.route('/comments')
+.get(function(req, res){
     res.sendFile(__dirname + '/Comments.html');
 })
 .post(function(req, res){
@@ -109,7 +110,7 @@ commentsRouter.get('/', function(req, res){
     })
     res.redirect("/");
 });
-app.use('/comments', commentsRouter);
+// app.use('/comments', commentsRouter);
 
 var eventsRouter = express.Router();
 eventsRouter.get('/', function(req, res){
@@ -130,7 +131,7 @@ loginRouter.get('/', function(req, res){
 app.use('/login', loginRouter);
 
 
-var registerRouter = express.Router();
+// var registerRouter = express.Router();
 app.route('/register')
 .get(function(req, res){
     res.sendFile(__dirname + '/Register.html')
