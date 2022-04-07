@@ -63,7 +63,7 @@ app.get('/', function(req, res){
 // app.use('/login', loginRouter);
 
 app.get('/login', function(req, res) {
-        res.sendFile(__dirname + '/login.html');    
+        res.render('pages/login');    
     //    var output = 'getting the login! ';
     //    var input1 = req.query.input1;
     //    var input2 = req.query.input2;
@@ -112,7 +112,7 @@ app.get('/login', function(req, res) {
 var adminRouter = express.Router();
 //admin main page. the dashboard (http://locahost:PORT/admin)
 adminRouter.get('/', function(req, res){
-    res.sendFile(__dirname + '/Admin.html');
+    res.render('pages/Admin');
 });
 //users page(http://localhost:Port/admin/users)
 adminRouter.get('/users', function(req, res){
@@ -144,7 +144,7 @@ adminRouter.use(function(req, res, next){
 // var commentsRouter = express.Router();
 app.route('/comments')
 .get(function(req, res){
-    res.sendFile(__dirname + '/Comments.html');
+    res.render('pages/Comments');
     
 const db = client.db("LFTU");
 var cursor = db.collection('comments').find({});
@@ -180,13 +180,13 @@ cursor.forEach(iterateFunc, errorFunc);
 
 var eventsRouter = express.Router();
 eventsRouter.get('/', function(req, res){
-    res.sendFile(__dirname + '/Events.html')
+    res.render('pages/Events')
 });
 app.use('/events', eventsRouter);
 
 var settingsRouter = express.Router();
 settingsRouter.get('/', function(req, res){
-    res.sendFile(__dirname + '/Settings.html')
+    res.render('pages/Settings')
 });
 app.use('/settings', settingsRouter);
 
@@ -196,7 +196,7 @@ app.use('/settings', settingsRouter);
 // var registerRouter = express.Router();
 app.route('/register')
 .get(function(req, res){
-    res.sendFile(__dirname + '/Register.html')
+    res.render('pages/Register')
 })
 .post(function(req, res){
     console.log(req.body);
