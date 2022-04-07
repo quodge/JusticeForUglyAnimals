@@ -145,8 +145,10 @@ adminRouter.use(function(req, res, next){
 app.route('/comments')
 .get(function(req, res){
     var comments = JSON.stringify(doc, null, 4);
-    res.render('pages/Comments');
-    comments: comments
+    res.render('pages/Comments', {
+        comments: comments
+    });
+    
 const db = client.db("LFTU");
 var cursor = db.collection('comments').find({});
 
