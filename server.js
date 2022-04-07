@@ -51,7 +51,7 @@ app.get('/login', function(req, res) {
    app.post('/login', (req, res) => {
        let username = req.body.username;
        let password = req.body.password;
-       res.send('Username: ${username} Password: ${password}');
+       res.send('Username:' + username + 'Password:' + password);
    
  });
 
