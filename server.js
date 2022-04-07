@@ -1,7 +1,14 @@
 //load express and create app
 var express = require('express');
+//Session tokens imports 
 const session = require('express-session');
 const {v4:uuidv4} = require('uuid');
+const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
+const passport = require('passport');
+const connectEnsureLogin = require('connect-ensure-login');
+const User = require('./user.js');
+
 var app = express();
 const PORT = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
@@ -21,6 +28,10 @@ client.connect(err => {
   // perform actions on the collection object
   //client.close();
 });
+
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.use(session({
