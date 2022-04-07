@@ -8,6 +8,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const passport = require('passport');
 //const connectEnsureLogin = require('connect-ensure-login');
 const User = require('./user.js');
+const ejs = require('ejs');
 
 var app = express();
 const PORT = process.env.PORT || 8080;
@@ -15,6 +16,7 @@ const bodyParser = require('body-parser');
 const {check, validationResult } = require('express-validator')
 //set port based on environment
 var port = PORT;
+app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 const { MongoClient } = require('mongodb');
 const uri = process.env.MONGODB_URI;
@@ -49,165 +51,165 @@ client.connect(err => {
 
 //send index.html file to the user for the home page
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + 'views/pages/index.html');
     
 });
 
 
-// var loginRouter = express.Router();
-// loginRouter.get('/', function(req, res){
-//     res.sendFile(__dirname + '/login.html')
-// });
-// app.use('/login', loginRouter);
+// // var loginRouter = express.Router();
+// // loginRouter.get('/', function(req, res){
+// //     res.sendFile(__dirname + '/login.html')
+// // });
+// // app.use('/login', loginRouter);
 
-app.get('/login', function(req, res) {
-        res.sendFile(__dirname + '/login.html');    
-    //    var output = 'getting the login! ';
-    //    var input1 = req.query.input1;
-    //    var input2 = req.query.input2;
-    //    console.log('The params:'+ req.query.input1 + " " + req.query.input2);
+// app.get('/login', function(req, res) {
+//         res.sendFile(__dirname + '/login.html');    
+//     //    var output = 'getting the login! ';
+//     //    var input1 = req.query.input1;
+//     //    var input2 = req.query.input2;
+//     //    console.log('The params:'+ req.query.input1 + " " + req.query.input2);
       
-    //res.send('Login Page working')
-   });
+//     //res.send('Login Page working')
+//    });
 
-   var loginValidate =[
-       check('password').isLength({ min: 8}).withMessage('Password must be at least 8 characters')
-       .matches('[0-9]').withMessage('Password must contain a number')
-       .matches('[A-Z]').withMessage('Password must contain an uppercase letter')];
-   // process the form (POST http://localhost:PORT/login)
-   app.post('/login', (req, res) => {
+//    var loginValidate =[
+//        check('password').isLength({ min: 8}).withMessage('Password must be at least 8 characters')
+//        .matches('[0-9]').withMessage('Password must contain a number')
+//        .matches('[A-Z]').withMessage('Password must contain an uppercase letter')];
+//    // process the form (POST http://localhost:PORT/login)
+//    app.post('/login', (req, res) => {
 
-    req.session.username = req.body.username;
-    res.send(`Hello ${req.session.username}. Your session ID is ${req.sessionID} and session expires in ${req.session.cookie.maxAge} milliseconds. `);
-        // const errors = validationResult(req);
-        // if(!errors.isEmpty()){
-        //     return res.status(422).json({errors:errors.array()});
-        // }
-        // else{
-        //     let username = req.body.username;
-        //     let password = req.body.password;
-        //     res.send('Username:' + username + 'Password:' + password);
-        // }
- });
-
-// app.route('/register-process')
-//     .get(function(req, res){
-//         res.send('Processing registration')
-//         var output = 'Getting register details';
-//         var firstname = req.query.firstname;
-//         var surname = req.query.surname;
-//         console.log('First and surname are ' + req.query.firstname + " " + req.query.surname);
-//     })
-//     .post(function(req, res) { console.log('processing');
-//     res.send('processing the registration form!');
+//     req.session.username = req.body.username;
+//     res.send(`Hello ${req.session.username}. Your session ID is ${req.sessionID} and session expires in ${req.session.cookie.maxAge} milliseconds. `);
+//         // const errors = validationResult(req);
+//         // if(!errors.isEmpty()){
+//         //     return res.status(422).json({errors:errors.array()});
+//         // }
+//         // else{
+//         //     let username = req.body.username;
+//         //     let password = req.body.password;
+//         //     res.send('Username:' + username + 'Password:' + password);
+//         // }
 //  });
 
+// // app.route('/register-process')
+// //     .get(function(req, res){
+// //         res.send('Processing registration')
+// //         var output = 'Getting register details';
+// //         var firstname = req.query.firstname;
+// //         var surname = req.query.surname;
+// //         console.log('First and surname are ' + req.query.firstname + " " + req.query.surname);
+// //     })
+// //     .post(function(req, res) { console.log('processing');
+// //     res.send('processing the registration form!');
+// //  });
 
 
 
 
-//create routes for admin section
-var adminRouter = express.Router();
-//admin main page. the dashboard (http://locahost:PORT/admin)
-adminRouter.get('/', function(req, res){
-    res.sendFile(__dirname + '/Admin.html');
-});
-//users page(http://localhost:Port/admin/users)
-adminRouter.get('/users', function(req, res){
-    res.send('I show all the users!');
-    // var output = 'getting the login! ';
-    // var input1 = req.query.input1;
-    // var input2 = req.query.input2;
-    // console.log('The params:'+ req.query.input1 + " " + req.query.input2);
-});
-//posts page (http://localhost:PORT/admin/posts)
-adminRouter.get('/comments', function(req, res){
-    res.send('I show all the comments'); 
-});
 
-//Apply the routes to the app
-app.use('/admin', adminRouter);
+// //create routes for admin section
+// var adminRouter = express.Router();
+// //admin main page. the dashboard (http://locahost:PORT/admin)
+// adminRouter.get('/', function(req, res){
+//     res.sendFile(__dirname + '/Admin.html');
+// });
+// //users page(http://localhost:Port/admin/users)
+// adminRouter.get('/users', function(req, res){
+//     res.send('I show all the users!');
+//     // var output = 'getting the login! ';
+//     // var input1 = req.query.input1;
+//     // var input2 = req.query.input2;
+//     // console.log('The params:'+ req.query.input1 + " " + req.query.input2);
+// });
+// //posts page (http://localhost:PORT/admin/posts)
+// adminRouter.get('/comments', function(req, res){
+//     res.send('I show all the comments'); 
+// });
 
-
-//Middleware
-adminRouter.use(function(req, res, next){
-    //log each request to the console
-    console.log(req.method, req.url);
-    //Continue to next part and go to route
-    next();});
+// //Apply the routes to the app
+// app.use('/admin', adminRouter);
 
 
+// //Middleware
+// adminRouter.use(function(req, res, next){
+//     //log each request to the console
+//     console.log(req.method, req.url);
+//     //Continue to next part and go to route
+//     next();});
 
-//Comments page
-// var commentsRouter = express.Router();
-app.route('/comments')
-.get(function(req, res){
-    res.sendFile(__dirname + '/Comments.html');
+
+
+// //Comments page
+// // var commentsRouter = express.Router();
+// app.route('/comments')
+// .get(function(req, res){
+//     res.sendFile(__dirname + '/Comments.html');
     
-const db = client.db("LFTU");
-var cursor = db.collection('comments').find({});
+// const db = client.db("LFTU");
+// var cursor = db.collection('comments').find({});
 
-function iterateFunc(doc){
-  var comments = JSON.stringify(doc, null, 4);
-  res.send(comments);
-    //console.log(JSON.stringify(doc, null, 4));
+// function iterateFunc(doc){
+//   //var comments = JSON.stringify(doc, null, 4);
+//   //res.send(comments);
+//     //console.log(JSON.stringify(doc, null, 4));
   
-}
+// }
 
-function errorFunc(error){
-  console.log(error);
-}
-cursor.forEach(iterateFunc, errorFunc);
-
-
-
-
-
-})
-.post(function(req, res){
-    console.log(req.body);
-    var comment = req.body;
-
-    client.db("LFTU").collection("comments").insertOne(comment, function(err, res){
-        if (err) throw err;
-        console.log("Comment added");
-    })
-    res.redirect("/comments");
-});
-// app.use('/comments', commentsRouter);
-
-var eventsRouter = express.Router();
-eventsRouter.get('/', function(req, res){
-    res.sendFile(__dirname + '/Events.html')
-});
-app.use('/events', eventsRouter);
-
-var settingsRouter = express.Router();
-settingsRouter.get('/', function(req, res){
-    res.sendFile(__dirname + '/Settings.html')
-});
-app.use('/settings', settingsRouter);
+// function errorFunc(error){
+//   console.log(error);
+// }
+// cursor.forEach(iterateFunc, errorFunc);
 
 
 
 
-// var registerRouter = express.Router();
-app.route('/register')
-.get(function(req, res){
-    res.sendFile(__dirname + '/Register.html')
-})
-.post(function(req, res){
-    console.log(req.body);
-    var regData = req.body;
 
-    client.db("LFTU").collection("users").insertOne(regData, function(err, res){
-        if(err) throw err;
-        console.log("User added");
-    });
-    res.redirect("/");
-});
+// })
+// .post(function(req, res){
+//     console.log(req.body);
+//     var comment = req.body;
 
-//app.use('/register', registerRouter);
+//     client.db("LFTU").collection("comments").insertOne(comment, function(err, res){
+//         if (err) throw err;
+//         console.log("Comment added");
+//     })
+//     res.redirect("/comments");
+// });
+// // app.use('/comments', commentsRouter);
+
+// var eventsRouter = express.Router();
+// eventsRouter.get('/', function(req, res){
+//     res.sendFile(__dirname + '/Events.html')
+// });
+// app.use('/events', eventsRouter);
+
+// var settingsRouter = express.Router();
+// settingsRouter.get('/', function(req, res){
+//     res.sendFile(__dirname + '/Settings.html')
+// });
+// app.use('/settings', settingsRouter);
+
+
+
+
+// // var registerRouter = express.Router();
+// app.route('/register')
+// .get(function(req, res){
+//     res.sendFile(__dirname + '/Register.html')
+// })
+// .post(function(req, res){
+//     console.log(req.body);
+//     var regData = req.body;
+
+//     client.db("LFTU").collection("users").insertOne(regData, function(err, res){
+//         if(err) throw err;
+//         console.log("User added");
+//     });
+//     res.redirect("/");
+// });
+
+// //app.use('/register', registerRouter);
 
 
 
