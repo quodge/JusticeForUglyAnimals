@@ -203,9 +203,12 @@
                     <h4>User</h4>
                 </div>
                 
-                    <% comments.forEach(function(comments){%>
+                    <%commentsList.forEach(comment => {%>
+                      <p><%= comment.userComment%></p>
+                    <%})%>
+                    <!-- <% comments.forEach(function(comments){%>
                       <p><%=comments %></p>
-                      <% }); %>
+                      <% }); %> -->
                          <!-- <button>Sign Up!</button> -->
             </li>
             <hr>

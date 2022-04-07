@@ -139,18 +139,24 @@ adminRouter.use(function(req, res, next){
     //Continue to next part and go to route
     next();});
 
+const commentsSchema = {
+    userComment: String
+}
 
+const comment = mongoose.model('Comment', commentsSchema);
 
 //Comments page
 // var commentsRouter = express.Router();
 app.route('/comments')
 .get(function(req, res){
+    comment.find({}, function(err, comments){
+        res.render('pages/Comments', {
+            commentsList: comments
+    })
     
-    var comments = ["This is a long comment kadsjicodoejfjnfdjncsfdjkndcskmdsklmdfklmfdkjnfnjipfvnj njofnopjvonjfvon njfvnno njornvopjnjonfovno njfonjvonj gnojrvnjg nj",
-"This is shorter", "jifkjfdajilnjifvnjifnji"];
   
-    res.render('pages/Comments', {
-        comments: comments
+    
+        
     });
     
 const db = client.db("LFTU");
