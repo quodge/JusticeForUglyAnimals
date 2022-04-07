@@ -30,7 +30,7 @@ client.connect(err => {
   // perform actions on the collection object
   //client.close();
 });
-mongoose.connect(uri);
+mongoose.connect(uri); 
 
 
 // app.use(passport.initialize());
