@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 const PORT = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
+const {check, validationResult } = require('express-validator')
 //set port based on environment
 var port = PORT;
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -47,12 +48,22 @@ app.get('/login', function(req, res) {
       
     //res.send('Login Page working')
    });
+
+   var loginValidate =[
+       check('password').isLength({ min: 8}).withMessage('Password must be at least 8 characters')
+       .matches('[0-9]').withMessage('Password must contain a number')
+       .matches('[A-Z]').withMessage('Password must contain an uppercase letter')];
    // process the form (POST http://localhost:PORT/login)
    app.post('/login', (req, res) => {
-       let username = req.body.username;
-       let password = req.body.password;
-       res.send('Username:' + username + 'Password:' + password);
-   
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(422).json({errors:errors.array()});
+        }
+        else{
+            let username = req.body.username;
+            let password = req.body.password;
+            res.send('Username:' + username + 'Password:' + password);
+        }
  });
 
 // app.route('/register-process')
