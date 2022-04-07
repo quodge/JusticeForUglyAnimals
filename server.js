@@ -1,13 +1,13 @@
 //load express and create app
 var express = require('express');
 //Session tokens imports 
-//const session = require('express-session');
-//const {v4:uuidv4} = require('uuid');
-//const mongoose = require('mongoose');
-//const passportLocalMongoose = require('passport-local-mongoose');
-//const passport = require('passport');
+const session = require('express-session');
+const {v4:uuidv4} = require('uuid');
+const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
+const passport = require('passport');
 //const connectEnsureLogin = require('connect-ensure-login');
-
+const User = require('./user.js');
 
 var app = express();
 const PORT = process.env.PORT || 8080;
@@ -30,7 +30,19 @@ client.connect(err => {
 });
 
 
+app.use(passport.initialize());
+app.use(passport.session());
 
+
+app.use(session({
+    genid: function(req){
+        return uuidv4();
+    },
+    secret: '=fmLV*U@FL`N]]~/zqtFCch.pBTGoU',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }
+}));
 
 
 
