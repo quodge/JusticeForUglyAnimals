@@ -46,17 +46,17 @@ app.route('/login-process')
    res.send('processing the login form!');
  });
 
-app.route('/register-process')
-    .get(function(req, res){
-        res.send('Processing registration')
-        var output = 'Getting register details';
-        var firstname = req.query.firstname;
-        var surname = req.query.surname;
-        console.log('First and surname are ' + req.query.firstname + " " + req.query.surname);
-    })
-    .post(function(req, res) { console.log('processing');
-    res.send('processing the registration form!');
- });
+// app.route('/register-process')
+//     .get(function(req, res){
+//         res.send('Processing registration')
+//         var output = 'Getting register details';
+//         var firstname = req.query.firstname;
+//         var surname = req.query.surname;
+//         console.log('First and surname are ' + req.query.firstname + " " + req.query.surname);
+//     })
+//     .post(function(req, res) { console.log('processing');
+//     res.send('processing the registration form!');
+//  });
 
 
 
@@ -123,7 +123,18 @@ app.use('/login', loginRouter);
 var registerRouter = express.Router();
 registerRouter.get('/', function(req, res){
     res.sendFile(__dirname + '/Register.html')
+})
+.post(function(req, res){
+    console.log(req.body);
+    var regData = req.body;
+
+    client.db("LFTU").collection("users").insertOne(regData, function(err, res){
+        if(err) throw err;
+        console.log("User added");
+    });
+    res.redirect("/");
 });
+
 app.use('/register', registerRouter);
 
 var cssRouter = express.Router();
