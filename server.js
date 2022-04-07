@@ -137,6 +137,8 @@ registerRouter.get('/', function(req, res){
 
 app.use('/register', registerRouter);
 
+
+
 var cssRouter = express.Router();
 cssRouter.get('/', function(req, res){
     res.sendFile(__dirname + '/Styles.css')
