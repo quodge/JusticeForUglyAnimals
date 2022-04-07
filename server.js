@@ -121,7 +121,8 @@ app.use('/login', loginRouter);
 
 
 var registerRouter = express.Router();
-registerRouter.get('/', function(req, res){
+app.route('/register')
+.get(function(req, res){
     res.sendFile(__dirname + '/Register.html')
 })
 .post(function(req, res){
@@ -135,7 +136,7 @@ registerRouter.get('/', function(req, res){
     res.redirect("/");
 });
 
-app.use('/register', registerRouter);
+//app.use('/register', registerRouter);
 
 
 
