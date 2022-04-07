@@ -187,16 +187,17 @@
 
 	}
 </script>
-<form>
-<p>Username <input type = "text" id = "username"></input></p>
-<p>Password <input type = "text" id = "password"></input></p>
+<form method = "POST" action = '/login'> 
+<p>Username <input type = "text" name = "username" id = "username"></input></p>
+<p>Password <input type = "password" name = "username" id = "password"></input></p>
 
 
 <!-- <h1>Response</h1> -->
 
 <p id="answer"></p>
 
-<input type = "button" value = "Login" onclick = "doStuff();" />
+<input type = "submit" value = "Login"> 
+<!-- onclick = "doStuff();" /> -->
 
 </form>
 
