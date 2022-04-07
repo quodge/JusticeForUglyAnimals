@@ -144,13 +144,14 @@ adminRouter.use(function(req, res, next){
 // var commentsRouter = express.Router();
 app.route('/comments')
 .get(function(req, res){
+    var comments = JSON.stringify(doc, null, 4);
     res.render('pages/Comments');
-    
+    comments: comments
 const db = client.db("LFTU");
 var cursor = db.collection('comments').find({});
 
 function iterateFunc(doc){
-  //var comments = JSON.stringify(doc, null, 4);
+  
   //res.send(comments);
     //console.log(JSON.stringify(doc, null, 4));
   

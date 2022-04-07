@@ -203,9 +203,9 @@
                     <h4>User</h4>
                 </div>
                 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Ut sit amet arcu cursus mi molestie varius. Duis nec ullamcorper
-                         sem. Vivamus a sem lorem. Suspendisse cursus nibh posuere urna</p>
+                    % listnames.forEach(function(comments){%>
+                      <p><%=comments %></p>
+                      <% }); %>
                          <!-- <button>Sign Up!</button> -->
             </li>
             <hr>
