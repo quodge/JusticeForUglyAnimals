@@ -98,6 +98,16 @@ adminRouter.use(function(req, res, next){
 var commentsRouter = express.Router();
 commentsRouter.get('/', function(req, res){
     res.sendFile(__dirname + '/Comments.html');
+})
+.post(function(req, res){
+    console.log(req.body);
+    var comment = req.body;
+
+    client.db("LFTU").collection("comments").insertOne(comment, function(err, res){
+        if (err) throw err;
+        console.log("Comment added");
+    })
+    res.redirect("/");
 });
 app.use('/comments', commentsRouter);
 
