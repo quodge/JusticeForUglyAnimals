@@ -158,15 +158,8 @@ app.get('/comments' ,(req, res) => {
         
     });
     
-const db = client.db("LFTU");
-var cursor = db.collection('comments').find({});
-
-
-
-
-
-
-
+// const db = client.db("LFTU");
+// var cursor = db.collection('comments').find({});
 
 
 })
@@ -178,7 +171,7 @@ var cursor = db.collection('comments').find({});
         if (err) throw err;
         console.log("Comment added");
     })
-    res.redirect("/comments");
+    res.render('pages/Comments');
 });
 // app.use('/comments', commentsRouter);
 
