@@ -162,8 +162,8 @@ app.get('/comments' ,(req, res) => {
 // var cursor = db.collection('comments').find({});
 
 
-})
-.post(function(req, res){
+});
+app.post('/comments' , (req, res) => {
     console.log(req.body);
     var comment = req.body;
 
