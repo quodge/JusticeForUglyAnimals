@@ -11,6 +11,8 @@ const User = require('./user.js');
 const ejs = require('ejs');
 //const bcrypt = require('bcrypt');
 
+
+
 var app = express();
 const PORT = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
@@ -34,7 +36,15 @@ client.connect(err => {
 });
 mongoose.connect(uri); 
 
+//Login-----------------------------------------------------
+const initializePassport =require('./passport-config');
+initializePassport(passport, username => {
+    users.find(user)
+})
 
+
+
+/////////////////////////////////////////////////////////////
 // app.use(passport.initialize());
 // app.use(passport.session());
 
