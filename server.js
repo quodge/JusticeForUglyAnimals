@@ -18,7 +18,7 @@ const {check, validationResult } = require('express-validator')
 var port = PORT;
 app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.urlencoded({extended: false}));
+//app.use(express.urlencoded({extended: false}));
 const { MongoClient } = require('mongodb');
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
