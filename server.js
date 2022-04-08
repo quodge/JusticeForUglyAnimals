@@ -9,7 +9,7 @@ const passport = require('passport');
 //const connectEnsureLogin = require('connect-ensure-login');
 const User = require('./user.js');
 const ejs = require('ejs');
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 
 var app = express();
 const PORT = process.env.PORT || 8080;
