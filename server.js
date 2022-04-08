@@ -197,7 +197,7 @@ app.route('/register')
 .get(function(req, res){
     res.render('pages/Register')
 });
-app.post('/register' , async (req, res) => {
+app.post('/register' , (req, res) => {
     //console.log(req.body);
     var regData = req.body;
     // try{
