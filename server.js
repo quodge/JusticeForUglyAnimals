@@ -9,6 +9,7 @@ const passport = require('passport');
 //const connectEnsureLogin = require('connect-ensure-login');
 const User = require('./user.js');
 const ejs = require('ejs');
+const bcrypt = require('bcrypt');
 
 var app = express();
 const PORT = process.env.PORT || 8080;
@@ -196,15 +197,30 @@ app.route('/register')
 .get(function(req, res){
     res.render('pages/Register')
 });
-app.post('/register' , (req, res) => {
-    console.log(req.body);
+app.post('/register' , async (req, res) => {
+    //console.log(req.body);
     var regData = req.body;
+    // try{
+    //     const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    //     var user = users.push({
+    //         id: Date.now().toString(),
+    //         firstname: req.body.firstname,
+    //         surname: req.body.surname,
+    //         dob: req.body.dob,
+    //         email:req.body.email,
+    //         username: req.body.username,
+    //         password: hashedPassword
+    //     })
+    //     res.redirect('/login')
+    // } catch{
+    //     res.redirect('/register')
+    // }
 
     client.db("LFTU").collection("users").insertOne(regData, function(err, res){
         if(err) throw err;
         console.log("User added");
     });
-    res.redirect("/");
+    res.redirect("/login");
 });
 
 //app.use('/register', registerRouter);
