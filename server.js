@@ -194,8 +194,8 @@ app.use('/settings', settingsRouter);
 app.route('/register')
 .get(function(req, res){
     res.render('pages/Register')
-})
-.post(function(req, res){
+});
+app.post('/register' , (req, res) => {
     console.log(req.body);
     var regData = req.body;
 
