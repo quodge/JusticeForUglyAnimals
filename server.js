@@ -171,7 +171,7 @@ app.post('/comments' , (req, res) => {
         if (err) throw err;
         console.log("Comment added");
     })
-    res.render('pages/Comments');
+    res.redirect('/comments');
 });
 // app.use('/comments', commentsRouter);
 
