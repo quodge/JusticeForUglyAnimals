@@ -153,10 +153,18 @@ adminRouter.get('/users', function(req, res){
     // var input2 = req.query.input2;
     // console.log('The params:'+ req.query.input1 + " " + req.query.input2);
 });
+adminRouter.post('/users' , function(req, res){
+
+});
+
 //posts page (http://localhost:PORT/admin/posts)
 adminRouter.get('/comments', function(req, res){
     res.send('I show all the comments'); 
 });
+adminRouter.post('/comments', function(req, res){
+    client.db("LFTU").collection("comments").deleteMany({});
+
+})
 
 //Apply the routes to the app
 app.use('/admin', adminRouter);
