@@ -40,7 +40,7 @@ mongoose.connect(uri);
 const usersSchema = {
     firstname: String,
     surname: String, 
-    dob: Date,
+    dob: String,
     email: String,
     username: String,
     password: String
