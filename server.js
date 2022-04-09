@@ -37,15 +37,16 @@ client.connect(err => {
 mongoose.connect(uri); 
 
 //Login-----------------------------------------------------
-// const usersSchema = {
-//     firstname: String,
-//     surname: String, 
-//     dob: Date,
-//     email: String,
-//     username: String,
-//     password: String
+const usersSchema = {
+    firstname: String,
+    surname: String, 
+    dob: Date,
+    email: String,
+    username: String,
+    password: String
 
-// }
+}
+const user = mongoose.model('firstname', 'surname', 'dob', 'email', 'username','password', usersSchema);
 
 // const username = mongoose.model('username', usersSchema);
 
@@ -153,13 +154,18 @@ adminRouter.get('/users', function(req, res){
     // var input2 = req.query.input2;
     // console.log('The params:'+ req.query.input1 + " " + req.query.input2);
 });
-adminRouter.post('/users' , function(req, res){
+adminRouter.post('/users' , (req, res) => {
+    user.find({}, function(err, users){
+        res.render('pages/Users', {
+            usersList: users
+        })
+    })
 
 });
 
 //posts page (http://localhost:PORT/admin/posts)
 adminRouter.get('/comments', function(req, res){
-    res.send('I show all the comments'); 
+    res.send('I delete all the comments'); 
 });
 adminRouter.post('/comments', function(req, res){
     client.db("LFTU").collection("comments").deleteMany({});
