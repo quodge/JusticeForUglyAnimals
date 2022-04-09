@@ -163,7 +163,8 @@ adminRouter.get('/comments', function(req, res){
 });
 adminRouter.post('/comments', function(req, res){
     client.db("LFTU").collection("comments").deleteMany({});
-
+    res.redirect("/comments");
+    
 })
 
 //Apply the routes to the app
