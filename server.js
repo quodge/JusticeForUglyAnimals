@@ -46,7 +46,7 @@ const usersSchema = {
     password: String
 
 }
-const user = mongoose.model('firstname', 'surname', 'dob', 'email', 'username','password', usersSchema);
+const user = mongoose.model("User", usersSchema);
 
 // const username = mongoose.model('username', usersSchema);
 
