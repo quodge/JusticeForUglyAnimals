@@ -37,10 +37,28 @@ client.connect(err => {
 mongoose.connect(uri); 
 
 //Login-----------------------------------------------------
-const initializePassport =require('./passport-config');
-initializePassport(passport, username => {
-    users.find(user)
-})
+// const usersSchema = {
+//     firstname: String,
+//     surname: String, 
+//     dob: Date,
+//     email: String,
+//     username: String,
+//     password: String
+
+// }
+
+// const username = mongoose.model('username', usersSchema);
+
+// username.find({}, function(err, users){
+     
+//         commentsList: users
+
+
+//     })
+// const initializePassport =require('./passport-config');
+// initializePassport(passport, username => {
+//     users.find(user)
+// })
 
 
 
