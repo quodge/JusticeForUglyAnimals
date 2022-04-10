@@ -11,7 +11,7 @@ const User = require('./user.js');
 const ejs = require('ejs');
 const bcrypt = require('bcrypt');
 const flash = require('express-flash')
-const session = require('express-session')
+const session = require('cookie-session')
 //const methodOverride = require('method-override')
 
 var app = express();
