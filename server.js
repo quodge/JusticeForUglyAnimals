@@ -270,7 +270,7 @@ app.post('/register' , async(req, res) => {
     //console.log(req.body); 
     var regData = req.body;
     //Try to hash password. Comment out down to end of catch and change user to regData in insertOne
-    try{
+    try{ 
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         var user = users.push({
             id: Date.now().toString(),
