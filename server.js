@@ -67,7 +67,7 @@ users.find({}, function(err, users){
 const initializePassport = require('./passport-config');
 initializePassport(
     passport, 
-    username => users.find(user => user.username === username),
+    username => users.find(user => users.username === username),
     id => users.find(user => user.id === id)
 )
 
