@@ -53,13 +53,21 @@ const username = mongoose.model('username', usersSchema);
 
 username.find({}, function(err, users){
      
-        commentsList: users
+        usernamesList: users
 
 
     })
+
+const users = mongoose.model('username', 'password', usersSchema);
+
+users.find({}, function(err, users){
+    usersList: users
+})
+
 const initializePassport =require('./passport-config');
 initializePassport(passport, 
-    username => users.find(user => user.username === username)
+    username => users.find(user => user.username === username),
+    id => users.find(user => user.id === id)
 )
 
 app.use(flash())
