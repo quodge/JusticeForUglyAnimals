@@ -12,7 +12,7 @@ const ejs = require('ejs');
 const bcrypt = require('bcrypt');
 const flash = require('express-flash')
 const session = require('express-session')
-
+const methodOverride = require('method-override')
 
 var app = express();
 const PORT = process.env.PORT || 8080;
