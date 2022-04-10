@@ -270,35 +270,44 @@ app.post('/register' , async(req, res) => {
     //console.log(req.body); 
     var regData = req.body;
     //Try to hash password. Comment out down to end of catch and change user to regData in insertOne
-    try{ 
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        var user = users.push({
-            id: Date.now().toString(),
-            firstname: req.body.firstname,
-            surname: req.body.surname,
-            dob: req.body.dob,
-            email:req.body.email,
-            username: req.body.username,
-            password: hashedPassword
-        })
-        var dateSubmit = Date.now().toString();
-        var firstnameSubmit = req.body.firstname;
-        var surnameSubmit = req.body.surname;
-        var dobSubmit = req.body.dob;
-        var emailSubmit = req.body.email;
-        var usernameSubmit = req.body.username;
-        var passwordSubmit = hashedPassword;
+    // try{ 
+    //     const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    //     var user = users.push({
+    //         id: Date.now().toString(),
+    //         firstname: req.body.firstname,
+    //         surname: req.body.surname,
+    //         dob: req.body.dob,
+    //         email:req.body.email,
+    //         username: req.body.username,
+    //         password: hashedPassword
+    //     })
+    //     var dateSubmit = Date.now().toString();
+    //     var firstnameSubmit = req.body.firstname;
+    //     var surnameSubmit = req.body.surname;
+    //     var dobSubmit = req.body.dob;
+    //     var emailSubmit = req.body.email;
+    //     var usernameSubmit = req.body.username;
+    //     var passwordSubmit = hashedPassword;
 
 
-        var user2 = {dateSubmit, firstnameSubmit, surnameSubmit, dobSubmit, usernameSubmit, passwordSubmit}
-        res.redirect('/login')
-    } catch{
-        res.redirect('/register')
-    }
+    //     // var user2 = {dateSubmit, firstnameSubmit, surnameSubmit, dobSubmit, usernameSubmit, passwordSubmit}
+    //     res.redirect('/login')
+    // } catch{
+    //     res.redirect('/register')
+    // }
     //////////////////////////////////////////////////////////
 
-    client.db("LFTU").collection("users").insertOne(user2, function(err, res){
-        console.log('Attempt to add user to database')
+    var user = users.push({
+        id: Date.now().toString(),
+        firstname: req.body.firstname,
+        surname: req.body.surname,
+        dob: req.body.dob,
+        email:req.body.email,
+        username: req.body.username,
+        password: req.body.password
+    })
+    client.db("LFTU").collection("users").insertOne(user, function(err, res){
+        
         if(err) throw err;
         console.log("User added");
     });
