@@ -281,13 +281,23 @@ app.post('/register' , async(req, res) => {
             username: req.body.username,
             password: hashedPassword
         })
+        var dateSubmit = Date.now().toString();
+        var firstnameSubmit = req.body.firstname;
+        var surnameSubmit = req.body.surname;
+        var dobSubmit = req.body.dob;
+        var emailSubmit = req.body.email;
+        var usernameSubmit = req.body.username;
+        var passwordSubmit = hashedPassword;
+
+
+        var user2 = {dateSubmit, firstnameSubmit, surnameSubmit, dobSubmit, usernameSubmit, passwordSubmit}
         res.redirect('/login')
     } catch{
         res.redirect('/register')
     }
     //////////////////////////////////////////////////////////
 
-    client.db("LFTU").collection("users").insertOne(user, function(err, res){
+    client.db("LFTU").collection("users").insertOne(user2, function(err, res){
         console.log('Attempt to add user to database')
         if(err) throw err;
         console.log("User added");
