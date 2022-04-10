@@ -265,7 +265,7 @@ app.route('/register')
 .get(function(req, res){
     res.render('pages/Register')
 });
-app.post('/register' , (req, res) => {
+app.post('/register' , async(req, res) => {
     //console.log(req.body);
     var regData = req.body;
     //Try to hash password. Comment out down to end of catch and change user to regData in insertOne
