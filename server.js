@@ -9,7 +9,7 @@ const passport = require('passport');
 //const connectEnsureLogin = require('connect-ensure-login');
 const User = require('./user.js');
 const ejs = require('ejs');
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const flash = require('express-flash')
 const session = require('express-session')
 
@@ -87,8 +87,7 @@ app.post('/login', passport.authenticate('local', {
     failureFlash: true
 }))
 /////////////////////////////////////////////////////////////
-// app.use(passport.initialize());
-// app.use(passport.session());
+
 
 
 // app.use(session({
@@ -132,20 +131,23 @@ app.get('/login', function(req, res) {
        .matches('[0-9]').withMessage('Password must contain a number')
        .matches('[A-Z]').withMessage('Password must contain an uppercase letter')];
    // process the form (POST http://localhost:PORT/login)
-   app.post('/login', (req, res) => {
+   
+   //Old unused post login method /////////////////////////////////////
+//    app.post('/login', (req, res) => {
 
-    req.session.username = req.body.username;
-    res.send(`Hello ${req.session.username}. Your session ID is ${req.sessionID} and session expires in ${req.session.cookie.maxAge} milliseconds. `);
-        // const errors = validationResult(req);
-        // if(!errors.isEmpty()){
-        //     return res.status(422).json({errors:errors.array()});
-        // }
-        // else{
-        //     let username = req.body.username;
-        //     let password = req.body.password;
-        //     res.send('Username:' + username + 'Password:' + password);
-        // }
- });
+//     req.session.username = req.body.username;
+//     res.send(`Hello ${req.session.username}. Your session ID is ${req.sessionID} and session expires in ${req.session.cookie.maxAge} milliseconds. `);
+//         // const errors = validationResult(req);
+//         // if(!errors.isEmpty()){
+//         //     return res.status(422).json({errors:errors.array()});
+//         // }
+//         // else{
+//         //     let username = req.body.username;
+//         //     let password = req.body.password;
+//         //     res.send('Username:' + username + 'Password:' + password);
+//         // }
+//  });
+ /////////////////////////////////////////////////////////////////////////
 
 // app.route('/register-process')
 //     .get(function(req, res){
@@ -266,23 +268,25 @@ app.route('/register')
 app.post('/register' , (req, res) => {
     //console.log(req.body);
     var regData = req.body;
-    // try{
-    //     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    //     var user = users.push({
-    //         id: Date.now().toString(),
-    //         firstname: req.body.firstname,
-    //         surname: req.body.surname,
-    //         dob: req.body.dob,
-    //         email:req.body.email,
-    //         username: req.body.username,
-    //         password: hashedPassword
-    //     })
-    //     res.redirect('/login')
-    // } catch{
-    //     res.redirect('/register')
-    // }
+    //Try to hash password. Comment out down to end of catch and change user to regData in insertOne
+    try{
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        var user = users.push({
+            id: Date.now().toString(),
+            firstname: req.body.firstname,
+            surname: req.body.surname,
+            dob: req.body.dob,
+            email:req.body.email,
+            username: req.body.username,
+            password: hashedPassword
+        })
+        res.redirect('/login')
+    } catch{
+        res.redirect('/register')
+    }
+    //////////////////////////////////////////////////////////
 
-    client.db("LFTU").collection("users").insertOne(regData, function(err, res){
+    client.db("LFTU").collection("users").insertOne(user, function(err, res){
         if(err) throw err;
         console.log("User added");
     });
