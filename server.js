@@ -1,7 +1,7 @@
 //load express and create app
 var express = require('express');
 //Session tokens imports 
-const session = require('express-session');
+//const session = require('express-session');
 const {v4:uuidv4} = require('uuid');
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
@@ -11,7 +11,7 @@ const User = require('./user.js');
 const ejs = require('ejs');
 //const bcrypt = require('bcrypt');
 const flash = require('express-flash')
-const flash = require('express-session')
+const session = require('express-session')
 
 
 var app = express();
