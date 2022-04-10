@@ -15,6 +15,7 @@ function initialize(passport, getUserByUsername, getUserById){
                 return done(null, false, {message: 'Password incorrect'})
             }
         }catch (e){
+            console.log('Problem in authenticateUser Try/catch')
             return done(e)
         }
 
