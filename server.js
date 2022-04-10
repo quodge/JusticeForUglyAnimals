@@ -297,15 +297,7 @@ app.post('/register' , async(req, res) => {
     // }
     //////////////////////////////////////////////////////////
 
-    var user = users.push({
-        id: Date.now().toString(),
-        firstname: req.body.firstname,
-        surname: req.body.surname,
-        dob: req.body.dob,
-        email:req.body.email,
-        username: req.body.username,
-        password: req.body.password
-    })
+    
     client.db("LFTU").collection("users").insertOne(regData, function(err, res){
         
         if(err) throw err;
