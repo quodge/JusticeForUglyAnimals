@@ -288,6 +288,7 @@ app.post('/register' , async(req, res) => {
     //////////////////////////////////////////////////////////
 
     client.db("LFTU").collection("users").insertOne(user, function(err, res){
+        console.log('Attempt to add user to database')
         if(err) throw err;
         console.log("User added");
     });
