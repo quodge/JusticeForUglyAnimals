@@ -272,6 +272,7 @@ app.post('/register' , async(req, res) => {
     //Try to hash password. Comment out down to end of catch and change user to regData in insertOne
     try{ 
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        console.log('hashed password is ', hashedPassword);
     //     var user = users.push({
     //         id: Date.now().toString(),
     //         firstname: req.body.firstname,
@@ -288,28 +289,21 @@ app.post('/register' , async(req, res) => {
     //     var emailSubmit = req.body.email;
     //     var usernameSubmit = req.body.username;
     //     var passwordSubmit = hashedPassword;
+
+
     //     // var user2 = {dateSubmit, firstnameSubmit, surnameSubmit, dobSubmit, usernameSubmit, passwordSubmit}
-
-
-    var userData = regData + hashedPassword;
-    client.db("LFTU").collection("users").insertOne(userData, function(err, res){
-        
-        if(err) throw err;
-        console.log("User added");
-    });
         res.redirect('/login')
     } catch{
-        
         res.redirect('/register')
     }
     //////////////////////////////////////////////////////////
 
     
-    // client.db("LFTU").collection("users").insertOne(regData, function(err, res){
+    client.db("LFTU").collection("users").insertOne(regData, function(err, res){
         
-    //     if(err) throw err;
-    //     console.log("User added");
-    // });
+        if(err) throw err;
+        console.log("User added");
+    });
     //res.redirect("/login");
 });
 
