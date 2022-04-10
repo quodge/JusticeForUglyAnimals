@@ -187,6 +187,11 @@
 
 	}
 </script>
+
+<% if (messages.error) {%>
+  <% messages.error %>
+<%}%>
+
 <form method = "POST" action = '/login'> 
 <p><label for ="username">Username</label><input type = "text" name = "username" id = "username"></input></p>
 <p><label for ="password">Password</label><input type = "password" name = "password" id = "password"></input></p>

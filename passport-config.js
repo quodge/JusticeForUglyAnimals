@@ -13,11 +13,11 @@ function initialize(passport, getUserByUsername){
             return done(null, false, {message: 'Password incorrect'})
         }
     }
-    passport.use(new LocalStrategy({ usernameField: 'username'}), 
-    authenticateUser)
+    passport.use(new LocalStrategy({ usernameField: 'username'}, 
+    authenticateUser))
     passport.serializeUser((user, done) => { })
     passport.deserializeUser((id, done) => { })
 
 }
 
-module.export = initialize
+module.exports = initialize

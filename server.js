@@ -10,7 +10,8 @@ const passport = require('passport');
 const User = require('./user.js');
 const ejs = require('ejs');
 //const bcrypt = require('bcrypt');
-
+const flash = require('express-flash')
+const flash = require('express-session')
 
 
 var app = express();
@@ -48,21 +49,35 @@ const usersSchema = {
 }
 const user = mongoose.model("User", usersSchema);
 
-// const username = mongoose.model('username', usersSchema);
+const username = mongoose.model('username', usersSchema);
 
-// username.find({}, function(err, users){
+username.find({}, function(err, users){
      
-//         commentsList: users
+        commentsList: users
 
 
-//     })
-// const initializePassport =require('./passport-config');
-// initializePassport(passport, username => {
-//     users.find(user)
-// })
+    })
+const initializePassport =require('./passport-config');
+initializePassport(passport, 
+    username => users.find(user => user.username === username)
+)
+
+app.use(flash())
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 
-
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+}))
 /////////////////////////////////////////////////////////////
 // app.use(passport.initialize());
 // app.use(passport.session());
