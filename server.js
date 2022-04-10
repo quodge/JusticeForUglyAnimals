@@ -291,7 +291,7 @@ app.post('/register' , async(req, res) => {
     //     // var user2 = {dateSubmit, firstnameSubmit, surnameSubmit, dobSubmit, usernameSubmit, passwordSubmit}
 
 
-    var userData = req.body + hashedPassword;
+    var userData = regData + hashedPassword;
     client.db("LFTU").collection("users").insertOne(userData, function(err, res){
         
         if(err) throw err;
@@ -299,7 +299,7 @@ app.post('/register' , async(req, res) => {
     });
         res.redirect('/login')
     } catch{
-        throw (err);
+        
         res.redirect('/register')
     }
     //////////////////////////////////////////////////////////
