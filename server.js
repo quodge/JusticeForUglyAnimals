@@ -306,7 +306,7 @@ app.post('/register' , async(req, res) => {
         username: req.body.username,
         password: req.body.password
     })
-    client.db("LFTU").collection("users").insertOne(user, function(err, res){
+    client.db("LFTU").collection("users").insertOne(regData, function(err, res){
         
         if(err) throw err;
         console.log("User added");
