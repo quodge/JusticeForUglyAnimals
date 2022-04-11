@@ -210,7 +210,7 @@ adminRouter.get('/', function(req, res){
     var tokenUsername = "";
     jwt.verify(token, jwtKey, (err, decodedToken) => {
         tokenUsername = decodedToken._id
-        console.log("The username is" + decodedToken);
+        console.log("The username is" + JSON.stringify(decodedToken));
     })
     console.log("The username is" + tokenUsername);
     //if(tokenUsername == "Admin")
