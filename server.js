@@ -361,7 +361,6 @@ function checkTokenValid(req, res){
         res.send(res.send('Other issue accessing token'))
         return res.status(400).end()
     }
-    res.send('The username : ' + payload.username);
     const newToken = jwt.sign({ username: payload.username }, jwtKey, {
         algorithm: "HS256",
         expiresIn: jwtExpirySeconds,
@@ -370,6 +369,9 @@ function checkTokenValid(req, res){
     res.cookie("token", newToken, {maxAge: jwtExpirySeconds * 1000})
 
 }
+
+
+
 function checkUserIsAdmin(req, res){
     const token = req.cookies.token
 
