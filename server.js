@@ -153,23 +153,26 @@ app.post('/register' , (req, res) => {
     //console.log(req.body); 
     var regData = req.body;
     var message = "";
-    var usernamesList = "";
-    username.find({}, function(err, users){
+    var duplicateName = "";
+    client.db("LFTU").collection("users").findOne({username: loginDetails.username}, function(err, user){
         
-        usernamesList: users
+        if (err) throw err;
+        duplicateName = result;
+        db.close();
 
 
     })
-    usernamesList.forEach(user => {
+    
+    if(regData.username == result){
+        message = "username already in use";
+        res.render('pages/Register', {
+            message: message
+        });
+        
+    }
+   
+    
 
-        if(regData.username == user){
-            message = "username already in use";
-            res.render('pages/Register', {
-                message: message
-            });
-            
-        }
-    });
     
 
     //regData = regData + 'myEvents: [""]';
