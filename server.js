@@ -161,34 +161,36 @@ app.post('/register' , async (req, res) => {
         console.log('User is ' + duplicateName);
 
 
-    })
-    
-    if(regData.username == duplicateName){
-        message = "username already in use";
-        res.render('pages/Register', {
-            message: message
-        });
-        
-    }
-   
-    
-
-    
-
-    //regData = regData + 'myEvents: [""]';
-    // https://www.npmjs.com/package/bcryptjs to find bcryptjs
-    bcrypt.genSalt(10, function(err, salt){
-        bcrypt.hash(regData.password, salt, function(err, hash){
-            regData.password = hash;
-            client.db("LFTU").collection("users").insertOne(regData, function(err, res){
-        
-                if(err) throw err;
-                console.log("User added");
-                
+        if(regData.username == duplicateName){
+            message = "username already in use";
+            res.render('pages/Register', {
+                message: message
             });
+            
+        }
+       
+        
+    
+        
+    
+        //regData = regData + 'myEvents: [""]';
+        // https://www.npmjs.com/package/bcryptjs to find bcryptjs
+        bcrypt.genSalt(10, function(err, salt){
+            bcrypt.hash(regData.password, salt, function(err, hash){
+                regData.password = hash;
+                client.db("LFTU").collection("users").insertOne(regData, function(err, res){
+            
+                    if(err) throw err;
+                    console.log("User added");
+                    
+                });
+            })
         })
+        res.redirect('/login');
+
     })
-    res.redirect('/login');       
+    
+           
 });
 
 
