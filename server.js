@@ -209,8 +209,8 @@ adminRouter.get('/', function(req, res){
     const token = req.cookies.token;
     var tokenUsername = "";
     jwt.verify(token, jwtKey, (err, decodedToken) => {
-        tokenUsername = decodedToken.id
-        console.log("The username is" + tokenUsername);
+        tokenUsername = decodedToken._id
+        console.log("The username is" + decodedToken);
     })
     console.log("The username is" + tokenUsername);
     //if(tokenUsername == "Admin")
