@@ -294,6 +294,9 @@ app.post('/comments' , (req, res) => {
 
 var eventsRouter = express.Router();
 eventsRouter.get('/', function(req, res){
+    checkToken(req, res);
+
+    
     res.render('pages/Events')
 });
 app.use('/events', eventsRouter);
@@ -363,6 +366,38 @@ app.post('/register' , (req, res) => {
 });
 
 //app.use('/register', registerRouter);
+
+function checkToken(req, res){
+    const token = req.cookies.token
+
+    if(!token){
+        res.send('Cant find a token')
+        return res.status(401).end()
+    }
+
+    var payload
+
+    try{
+        payload = jwt.verify(token, jwtKey)
+    }catch (e){
+        if(e instanceof jwt.JsonWebTokenError){
+            res.send('Credentials invalid')
+            return res.status(401).end()
+        }
+        res.send(res.send('Other issue accessing token'))
+        return res.status(400).end()
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
