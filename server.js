@@ -129,7 +129,7 @@ app.post('/login', (req, res) => {
 
 app.post('/signout', (req, res) => {
     console.log('Reaching /signout post')
-    const newToken = jwt.sign({ username }, jwtKey, {
+    const newToken = jwt.sign({}, jwtKey, {
         algorithm: "HS256",
         expiresIn: 0,
     })
@@ -149,6 +149,23 @@ app.route('/register')
 app.post('/register' , (req, res) => {
     //console.log(req.body); 
     var regData = req.body;
+
+    username.find({}, function(err, users){
+        
+        usernamesList: users
+
+
+    })
+    usernamesList.forEach(user => {
+        if(regData.username == user){
+            res.render('pages/Register', {
+                message: "Username already in use"
+            });
+            
+        }
+    });
+    
+
     //regData = regData + 'myEvents: [""]';
     // https://www.npmjs.com/package/bcryptjs to find bcryptjs
     bcrypt.genSalt(10, function(err, salt){
