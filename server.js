@@ -394,7 +394,7 @@ function checkUserIsAdmin(req, res){
                 expiresIn: jwtExpirySeconds,
             })
         }
-        if (payload.username != AdminLFTU){
+        if (payload.username != 'AdminLFTU'){
             res.redirect('/pageUnavailable')
         }
     }
