@@ -212,6 +212,9 @@ adminRouter.get('/', function(req, res){
     const decodedToken = jwt.decode(token, {
         complete: true
     });
+    if(!decodedToken){
+        res.send("Not a token")
+    }
     res.send("The token is" + decodedToken.header );
     
     //if(tokenUsername == "Admin")
