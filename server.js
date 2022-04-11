@@ -149,7 +149,7 @@ app.route('/register')
 app.post('/register' , (req, res) => {
     //console.log(req.body); 
     var regData = req.body;
-
+    var message = "";
     username.find({}, function(err, users){
         
         usernamesList: users
@@ -157,8 +157,9 @@ app.post('/register' , (req, res) => {
 
     })
     usernamesList.forEach(user => {
+
         if(regData.username == user){
-            var message = "username already in use"
+            message = "username already in use";
             res.render('pages/Register', {
                 message: message
             });
