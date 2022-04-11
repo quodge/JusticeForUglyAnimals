@@ -157,7 +157,7 @@ app.post('/register' , (req, res) => {
     client.db("LFTU").collection("users").findOne({username: regData.username}, function(err, user){
         
         if (err) throw err;
-        duplicateName = result;
+        duplicateName = user;
         db.close();
 
 
