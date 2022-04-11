@@ -214,8 +214,9 @@ adminRouter.get('/', function(req, res){
         var tokenId = JSON.stringify(decodedToken.id)
         tokenUsername = decodedToken.username
         console.log("The username is" + JSON.stringify(decodedToken));
+        console.log("The username is" + tokenUsername + tokenId);
     })
-    console.log("The username is" + tokenUsername + tokenId);
+    
     //if(tokenUsername == "Admin")
     console.log("The token is" + token);
     res.render('pages/Admin');
