@@ -204,6 +204,9 @@ app.get('/login', function(req, res) {
 var adminRouter = express.Router();
 //admin main page. the dashboard (http://locahost:PORT/admin)
 adminRouter.get('/', function(req, res){
+    checkTokenValid(req, res)
+
+    console.log("The token is" + token);
     res.render('pages/Admin');
 });
 //users page(http://localhost:Port/admin/users)
@@ -253,25 +256,7 @@ const comment = mongoose.model('Comment', commentsSchema);
 //Comments page
 // var commentsRouter = express.Router();
 app.get('/comments' ,(req, res) => {
-    const token = req.cookies.token
-
-    if(!token){
-        res.send('Cant find a token')
-        return res.status(401).end()
-    }
-
-    var payload
-
-    try{
-        payload = jwt.verify(token, jwtKey)
-    }catch (e){
-        if(e instanceof jwt.JsonWebTokenError){
-            res.send('Credentials invalid')
-            return res.status(401).end()
-        }
-        res.send(res.send('Other issue accessing token'))
-        return res.status(400).end()
-    }
+    checkTokenValid(req, res)
     
     comment.find({}, function(err, comments){
         res.render('pages/Comments', {
