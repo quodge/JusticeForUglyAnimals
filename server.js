@@ -160,7 +160,7 @@ app.post('/register' , (req, res) => {
         if(regData.username == user){
             var message = "username already in use"
             res.render('pages/Register', {
-                message
+                message: message
             });
             
         }
