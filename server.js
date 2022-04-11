@@ -158,8 +158,9 @@ app.post('/register' , (req, res) => {
     })
     usernamesList.forEach(user => {
         if(regData.username == user){
+            var message = "username already in use"
             res.render('pages/Register', {
-                message: "Username already in use"
+                message
             });
             
         }
