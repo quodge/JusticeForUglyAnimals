@@ -166,9 +166,13 @@ app.get('/login', function(req, res) {
 
 app.post('/signout', (req, res) => {
     console.log('Reaching /signout post')
+    const newToken = jwt.sign({ username }, jwtKey, {
+        algorithm: "HS256",
+        expiresIn: 0,
+    })
+    console.log("token = ", newToken)
+    res.cookie("token", newToken, {maxAge: 0 * 1000})
     
-    window.localStorage.clear();
-    //window.sessionStorage.removeItem('token')
     res.redirect('/');
 })
 
