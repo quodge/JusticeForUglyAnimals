@@ -327,10 +327,10 @@ app.post('/deleteAccount', async function(req, res){
         }
     }
     var payload = jwt.verify(token, jwtKey)
-    res.send('The username is ' + payload.username)
+    //res.send('The username is ' + payload.username)
 
-    //await client.db("LFTU").collection("users").deleteOne({username: regData.username}, function(err, user){
-})
+    await client.db("LFTU").collection("users").deleteOne({username: payload.username});
+    })
 
 
 /////////////////////////////////// UNAVAILABLE OR UNACCESSABLE /////////////////////////
