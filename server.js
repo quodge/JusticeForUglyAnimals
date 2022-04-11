@@ -109,7 +109,9 @@ app.post('/login', (req, res) => {
                 res.send("Incorrect password");
             }
             else{
-                const id = username
+                var id = "";
+                id = id + username;
+
                 const token = jwt.sign({ id }, jwtKey, {
                     algorithm: "HS256",
                     expiresIn: jwtExpirySeconds,
