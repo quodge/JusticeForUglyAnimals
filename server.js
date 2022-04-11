@@ -153,6 +153,7 @@ app.post('/register' , (req, res) => {
     //console.log(req.body); 
     var regData = req.body;
     var message = "";
+    var usernamesList = "";
     username.find({}, function(err, users){
         
         usernamesList: users
