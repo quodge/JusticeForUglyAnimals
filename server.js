@@ -109,8 +109,8 @@ app.post('/login', (req, res) => {
                 res.send("Incorrect password");
             }
             else{
-                var userName = "";
-                userName = userName + username;
+                var userName = loginDetails.username;
+                
 
                 const token = jwt.sign({ username: userName }, jwtKey, {
                     algorithm: "HS256",
