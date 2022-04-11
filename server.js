@@ -304,7 +304,34 @@ app.use('/settings', settingsRouter);
 
 /////////////////////////////////// DELETE ACCOUNT ////////////////////////////////////
 
-//app
+app.post('/deleteAccount', async function(req, res){
+    checkTokenValid(req, res);
+
+    const token = req.cookies.token
+
+    if(!token){
+        res.redirect('/unauthorised')
+        return res.status(401).end()
+
+        var payload
+
+        try{
+            payload = jwt.verify(token, jwtKey)
+        }catch (e){
+            if(e instanceof jwt.JsonWebTokenError){
+                res.send('Credentials invalid')
+                return res.status(401).end()
+            }
+            res.send(res.send('Other issue accessing token'))
+            return res.status(400).end()
+        }
+    }
+    var payload = jwt.verify(token, jwtKey)
+    res.send('The username is ' + payload.username)
+
+    //await client.db("LFTU").collection("users").deleteOne({username: regData.username}, function(err, user){
+})
+
 
 /////////////////////////////////// UNAVAILABLE OR UNACCESSABLE /////////////////////////
 
