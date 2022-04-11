@@ -88,16 +88,16 @@ app.post('/login', (req, res) => {
         if(user == undefined){
             res.send("Username not found");
         }
-        bcrypt.compare(loginDetails.password, user.password, function(err, res){
+        bcrypt.compare(loginDetails.password, user.password, function(err, access){
             if(res == false){
-                res.send("Incorrect password");
+                access.send("Incorrect password");
             }
             else{
-                
+                res.redirect('/');
             }
         })
     })
-    res.redirect('/');
+    
 })
 /////////////////////////////////////////////////////////////
 
