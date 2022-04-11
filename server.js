@@ -209,7 +209,7 @@ var adminRouter = express.Router();
 adminRouter.get('/', function(req, res){
     checkTokenValid(req, res)
     const token = req.cookies.token;
-    const decodedToken = jwt.decode(token, {
+    const decodedToken = jwt.decode(token, jwtKey, {
         complete: true
     });
     if(!decodedToken){
