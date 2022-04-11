@@ -211,10 +211,11 @@ adminRouter.get('/', function(req, res){
     const token = req.cookies.token;
     var tokenUsername = "";
     jwt.verify(token, jwtKey, (err, decodedToken) => {
-        tokenUsername = JSON.stringify(decodedToken.id)
+        var tokenId = JSON.stringify(decodedToken.id)
+        tokenUsername = decodedToken.username
         console.log("The username is" + JSON.stringify(decodedToken));
     })
-    console.log("The username is" + tokenUsername);
+    console.log("The username is" + tokenUsername + tokenId);
     //if(tokenUsername == "Admin")
     console.log("The token is" + token);
     res.render('pages/Admin');
