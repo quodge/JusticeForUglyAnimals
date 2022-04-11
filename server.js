@@ -149,7 +149,7 @@ app.route('/register')
         message: message
     })
 });
-app.post('/register' , (req, res) => {
+app.post('/register' , async (req, res) => {
     //console.log(req.body); 
     var regData = req.body;
     var message = "";
