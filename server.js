@@ -380,7 +380,7 @@ function checkUserIsAdmin(req, res){
         return res.status(401).end()
 
         var payload
-
+    }
         try{
             payload = jwt.verify(token, jwtKey)
         }catch (e){
@@ -398,7 +398,7 @@ function checkUserIsAdmin(req, res){
             res.redirect('/pageUnavailable')
         }
     }
-}
+
 
 function checkTokenInvalid(req, res){
     const token = req.cookies.token
