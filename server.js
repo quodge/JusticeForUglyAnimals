@@ -84,12 +84,12 @@ users.find({}, function(err, users){
 
 app.post('/login', (req, res) => {
     var loginDetails = req.body;
-    users.findOne({username: loginDetails.username}, function(err, user){
+    client.db("LFTU").collection("users").findOne({username: loginDetails.username}, function(err, user){
         if(user == undefined){
             res.send("Username not found");
         }
         bcrypt.compare(loginDetails.password, user.password, function(err, res){
-            if(res === true){
+            if(res == true){
                 res.redirect('/home');
             }
             else{
