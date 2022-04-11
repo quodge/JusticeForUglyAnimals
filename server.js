@@ -93,7 +93,7 @@ users.find({}, function(err, users){
 
 
 app.get('/', function(req, res){
-    checkTokenInvalid(req, res);
+    
     res.render('pages/index');
     
 });
@@ -151,7 +151,8 @@ app.post('/login', (req, res) => {
 // app.use('/login', loginRouter);
 
 app.get('/login', function(req, res) {
-        res.render('pages/login');    
+    checkTokenInvalid(req, res); 
+    res.render('pages/login');    
     //    var output = 'getting the login! ';
     //    var input1 = req.query.input1;
     //    var input2 = req.query.input2;
