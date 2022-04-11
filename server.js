@@ -337,9 +337,13 @@ app.post('/register' , (req, res) => {
 });
 
 app.get('/pageUnavailable', function(req, res){
+    
     res.render('pages/NotLoggedIn');
 });
-//app.use('/register', registerRouter);
+
+app.get('/unauthorised', function(req, res){
+    res.render('pages/NotAdmin');
+})
 
 function checkTokenValid(req, res){
     const token = req.cookies.token
@@ -376,7 +380,7 @@ function checkUserIsAdmin(req, res){
     const token = req.cookies.token
 
     if(!token){
-        res.redirect('/pageUnavailable')
+        res.redirect('/unauthorised')
         return res.status(401).end()
 
         var payload
@@ -395,7 +399,7 @@ function checkUserIsAdmin(req, res){
             })
         }
         if (payload.username != 'AdminLFTU'){
-            res.redirect('/pageUnavailable')
+            res.redirect('/unauthorised')
         }
     }
 
