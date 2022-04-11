@@ -208,14 +208,18 @@ var adminRouter = express.Router();
 //admin main page. the dashboard (http://locahost:PORT/admin)
 adminRouter.get('/', function(req, res){
     checkTokenValid(req, res)
-    const token = req.cookies.token;
-    const decodedToken = jwt.decode(token, jwtKey, {
-        complete: true
-    });
-    if(!decodedToken){
-        res.send("Not a token")
-    }
-    res.send("The token is" + JSON.stringify(decodedToken) );
+    var currentToken = req.cookies.token;
+    var base64Url = currentToken.split('.')[1];
+    var decodedValue = JSON.parse(window.atob(base64Url));
+    var value = JSON.parse(decodedValue)
+    res.send("The username is " + value);
+    // const decodedToken = jwt.decode(token,  {
+    //     complete: true
+    // });
+    // if(!decodedToken){
+    //     res.send("Not a token")
+    // }
+    // res.send("The token is" + JSON.stringify(decodedToken) );
     
     //if(tokenUsername == "Admin")
     
