@@ -185,13 +185,22 @@ adminRouter.get('/', function(req, res){
 });
 //users page(http://localhost:Port/admin/users)
 adminRouter.get('/users', function(req, res){
-    res.send('I show all the users!');
+    checkUserIsAdmin(req, res);
+    
+    user.find({}, function(err, users){
+        res.render('pages/Users', {
+            usersList: users
+        })
+    })
+    
+    //res.send('I show all the users!');
     // var output = 'getting the login! ';
     // var input1 = req.query.input1;
     // var input2 = req.query.input2;
     // console.log('The params:'+ req.query.input1 + " " + req.query.input2);
 });
 adminRouter.post('/users' , (req, res) => {
+    checkUserIsAdmin(req, res);
     user.find({}, function(err, users){
         res.render('pages/Users', {
             usersList: users
@@ -202,9 +211,11 @@ adminRouter.post('/users' , (req, res) => {
 
 //posts page (http://localhost:PORT/admin/posts)
 adminRouter.get('/comments', function(req, res){
-    res.send('I delete all the comments'); 
+    checkUserIsAdmin(req, res);
+    res.send('I delete all the comments when the button is pressed'); 
 });
 adminRouter.post('/comments', function(req, res){
+    checkUserIsAdmin(req, res);
     client.db("LFTU").collection("comments").deleteMany({});
     res.redirect("/comments");
     
