@@ -211,7 +211,8 @@ adminRouter.get('/', function(req, res){
     var currentToken = req.cookies.token;
     var base64Url = currentToken.split('.')[1];
     var decodedValue = JSON.parse(window.atob(base64Url));
-    var value = JSON.parse(decodedValue)
+    var value = ""
+    value += JSON.parse(decodedValue)
     res.send("The username is " + value);
     // const decodedToken = jwt.decode(token,  {
     //     complete: true
