@@ -207,7 +207,7 @@ var adminRouter = express.Router();
 adminRouter.get('/', function(req, res){
     checkTokenValid(req, res)
     const token = req.cookies.token;
-    const tokenUsername = "";
+    var tokenUsername = "";
     jwt.verify(token, jwtKey, (err, decodedToken) => {
         tokenUsername = decodedToken.id
        
