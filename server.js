@@ -149,12 +149,12 @@ app.route('/register')
         message: message
     })
 });
-app.post('/register' , async (req, res) => {
+app.post('/register' , (req, res) => {
     //console.log(req.body); 
     var regData = req.body;
     var message = "";
     var duplicateName = "";
-    await client.db("LFTU").collection("users").findOne({username: regData.username}, function(err, user){
+    client.db("LFTU").collection("users").findOne({username: regData.username}, function(err, user){
         
         if (err) throw err;
         duplicateName = user.username;
