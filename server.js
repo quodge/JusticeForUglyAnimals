@@ -212,7 +212,7 @@ adminRouter.get('/', function(req, res){
         tokenUsername = decodedToken.id
        
     })
-    console.log(tokenUsername);
+    console.log("The username is" + tokenUsername);
     //if(tokenUsername == "Admin")
     console.log("The token is" + token);
     res.render('pages/Admin');
