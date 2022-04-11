@@ -275,10 +275,11 @@ app.post('/register' , (req, res) => {
         
                 if(err) throw err;
                 console.log("User added");
-                res.redirect('/login')
+                
             });
         })
     })
+    res.redirect('/login');
     //Try to hash password. Comment out down to end of catch and change user to regData in insertOne
     // try{ 
     //     const hashedPassword = await bcrypt.hash(req.body.password, 10);
