@@ -330,6 +330,7 @@ app.post('/deleteAccount', async function(req, res){
     //res.send('The username is ' + payload.username)
 
     await client.db("LFTU").collection("users").deleteOne({username: payload.username});
+    res.redirect('/');
     })
 
 
