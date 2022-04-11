@@ -158,7 +158,7 @@ app.post('/register' , async (req, res) => {
         
         if (err) throw err;
         duplicateName = user.username;
-        console.log('User is ' + user);
+        console.log('User is ' + duplicateName);
 
 
     })
