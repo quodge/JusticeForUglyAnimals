@@ -164,7 +164,7 @@ app.get('/login', function(req, res) {
    
    
 
-app.post('/signout', function(req, res){
+app.post('/signout', (req, res) => {
     document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     localStorage.removeItem('token')
     sessionStorage.removeItem('token')
