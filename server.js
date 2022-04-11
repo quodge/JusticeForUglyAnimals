@@ -432,7 +432,7 @@ imageRouter.get('/image5', function(req, res){
     res.sendFile(__dirname + '/images/photo5.jpg')
 });
 imageRouter.get('/sadDog', function(req, res){
-    res.sendFile(__dirname, + /images/sadDog.jpg)
+    res.sendFile(__dirname, + '/images/sadDog.jpg')
 })
 
 app.use('/images', imageRouter);
