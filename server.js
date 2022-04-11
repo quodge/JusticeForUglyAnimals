@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser())
 
 const jwtKey = process.env.JWT_KEY
-const jwtExpirySeconds = process.env.JWT_EXPIRY
+const jwtExpirySeconds = 600
 //app.use(express.urlencoded({extended: false}));
 const { MongoClient } = require('mongodb');
 const uri = process.env.MONGODB_URI;
@@ -88,6 +88,16 @@ users.find({}, function(err, users){
 //app.use(passport.session())
 
 
+
+
+
+
+app.get('/', function(req, res){
+    checkTokenInvalid(req, res);
+    res.render('pages/index');
+    
+});
+
 app.post('/login', (req, res) => {
     var loginDetails = req.body;
     client.db("LFTU").collection("users").findOne({username: loginDetails.username}, function(err, user){
@@ -101,10 +111,10 @@ app.post('/login', (req, res) => {
             else{
                 const token = jwt.sign({ username }, jwtKey, {
                     algorithm: "HS256",
-                    expiresIn: 600,
+                    expiresIn: jwtExpirySeconds,
                 })
                 console.log("token = ", token)
-                res.cookie("token", token, {maxAge: 600 * 1000})
+                res.cookie("token", token, {maxAge: jwtExpirySeconds * 1000})
                 res.redirect('/');
             }
         })
@@ -131,10 +141,7 @@ app.post('/login', (req, res) => {
 
 
 //send index.html file to the user for the home page
-app.get('/', function(req, res){
-    res.render('pages/index');
-    
-});
+
 
 
 // var loginRouter = express.Router();
@@ -294,15 +301,17 @@ app.post('/comments' , (req, res) => {
 
 var eventsRouter = express.Router();
 eventsRouter.get('/', function(req, res){
-    checkToken(req, res);
+    checkTokenValid(req, res);
 
-    
+
     res.render('pages/Events')
 });
 app.use('/events', eventsRouter);
 
 var settingsRouter = express.Router();
 settingsRouter.get('/', function(req, res){
+    checkTokenValid(req, res);
+
     res.render('pages/Settings')
 });
 app.use('/settings', settingsRouter);
@@ -313,6 +322,7 @@ app.use('/settings', settingsRouter);
 // var registerRouter = express.Router();
 app.route('/register')
 .get(function(req, res){
+    checkTokenInvalid(req, res)
     res.render('pages/Register')
 });
 app.post('/register' , (req, res) => {
@@ -367,7 +377,7 @@ app.post('/register' , (req, res) => {
 
 //app.use('/register', registerRouter);
 
-function checkToken(req, res){
+function checkTokenValid(req, res){
     const token = req.cookies.token
 
     if(!token){
@@ -389,7 +399,14 @@ function checkToken(req, res){
     }
 }
 
+function checkTokenInvalid(req, res){
+    const token = req.cookies.token
 
+    if(token){
+        res.send('Already logged in')
+        
+    }
+}
 
 
 
