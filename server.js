@@ -209,16 +209,13 @@ var adminRouter = express.Router();
 adminRouter.get('/', function(req, res){
     checkTokenValid(req, res)
     const token = req.cookies.token;
-    var tokenUsername = "";
-    jwt.verify(token, jwtKey, (err, decodedToken) => {
-        var tokenId = JSON.stringify(decodedToken.id)
-        tokenUsername = decodedToken.username
-        console.log("The username is" + JSON.stringify(decodedToken));
-        console.log("The username is" + tokenUsername + tokenId);
-    })
+    const decodedToken = jwt.decode(token, {
+        complete: true
+    });
+    res.send("The token is" + decodedToken.header );
     
     //if(tokenUsername == "Admin")
-    console.log("The token is" + token);
+    
     res.render('pages/Admin');
 });
 //users page(http://localhost:Port/admin/users)
