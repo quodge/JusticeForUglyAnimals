@@ -215,7 +215,7 @@ adminRouter.get('/', function(req, res){
     if(!decodedToken){
         res.send("Not a token")
     }
-    res.send("The token is" + decodedToken.header );
+    res.send("The token is" + JSON.stringify(decodedToken.header) );
     
     //if(tokenUsername == "Admin")
     
