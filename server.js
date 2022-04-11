@@ -180,21 +180,7 @@ app.post('/signout', (req, res) => {
 var adminRouter = express.Router();
 //admin main page. the dashboard (http://locahost:PORT/admin)
 adminRouter.get('/', function(req, res){
-    checkTokenValid(req, res)
-    var currentToken = req.cookies.token;
-    // var decoded = jwt_decode(currentToken);
-    // var value = JSON.stringify(decoded);
-    // res.send("The username is " + value);
-    const decodedToken = jwt.decode(token,  {
-        complete: true
-    });
-    if(!decodedToken){
-        res.send("Not a token")
-    }
-    res.send("The token is" + JSON.stringify(decodedToken) );
-    
-    //if(tokenUsername == "Admin")
-    
+    checkUserIsAdmin(req, res)
     res.render('pages/Admin');
 });
 //users page(http://localhost:Port/admin/users)
@@ -383,9 +369,33 @@ function checkTokenValid(req, res){
     console.log("token = ", newToken)
     res.cookie("token", newToken, {maxAge: jwtExpirySeconds * 1000})
 
+}
+function checkUserIsAdmin(req, res){
+    const token = req.cookies.token
 
+    if(!token){
+        res.redirect('/pageUnavailable')
+        return res.status(401).end()
 
+        var payload
 
+        try{
+            payload = jwt.verify(token, jwtKey)
+        }catch (e){
+            if(e instanceof jwt.JsonWebTokenError){
+                res.send('Credentials invalid')
+                return res.status(401).end()
+            }
+            res.send('The username : ' + payload.username);
+            const newToken = jwt.sign({ username: payload.username }, jwtKey, {
+                algorithm: "HS256",
+                expiresIn: jwtExpirySeconds,
+            })
+        }
+        if (payload.username != AdminLFTU){
+            res.redirect('/pageUnavailable')
+        }
+    }
 }
 
 function checkTokenInvalid(req, res){
