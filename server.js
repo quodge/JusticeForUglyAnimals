@@ -12,6 +12,8 @@ const ejs = require('ejs');
 const bcrypt = require('bcryptjs');
 const flash = require('express-flash')
 const session = require('cookie-session')
+const cookieParser = require("cookie-parser")
+const jwt = require("jsonwebtoken")
 //const methodOverride = require('method-override')
 
 var app = express();
@@ -22,6 +24,10 @@ const {check, validationResult } = require('express-validator')
 var port = PORT;
 app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser())
+
+const jwtKey = process.env.JWT_KEY
+const jwtExpirySeconds = process.env.JWT_EXPIRY
 //app.use(express.urlencoded({extended: false}));
 const { MongoClient } = require('mongodb');
 const uri = process.env.MONGODB_URI;
@@ -93,10 +99,18 @@ app.post('/login', (req, res) => {
                 res.send("Incorrect password");
             }
             else{
+                const token = jwt.sign({ username }, jwtKey, {
+                    algorithm: "HS256",
+                    expiresIn: jwtExpirySeconds,
+                })
+                console.log("token = ", token)
+                res.cookie("token", token, {maxAge: jwtExpirySeconds * 1000})
                 res.redirect('/');
             }
         })
     })
+
+
     
 })
 /////////////////////////////////////////////////////////////
