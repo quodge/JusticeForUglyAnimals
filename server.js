@@ -167,8 +167,8 @@ app.get('/login', function(req, res) {
 app.post('/signout', (req, res) => {
     console.log('Reaching /signout post')
     
-    localStorage.clear();
-    sessionStorage.removeItem('token')
+    window.localStorage.clear();
+    //window.sessionStorage.removeItem('token')
     res.redirect('/');
 })
 
