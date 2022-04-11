@@ -112,7 +112,7 @@ app.post('/login', (req, res) => {
                 var id = "";
                 id = id + username;
 
-                const token = jwt.sign({ id }, jwtKey, {
+                const token = jwt.sign({ username, id: id }, jwtKey, {
                     algorithm: "HS256",
                     expiresIn: jwtExpirySeconds,
                 })
