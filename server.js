@@ -302,7 +302,7 @@ app.route('/register')
 app.post('/register' , (req, res) => {
     //console.log(req.body); 
     var regData = req.body;
-    regData = regData + 'myEvents: [""]';
+    //regData = regData + 'myEvents: [""]';
     // https://www.npmjs.com/package/bcryptjs to find bcryptjs
     bcrypt.genSalt(10, function(err, salt){
         bcrypt.hash(regData.password, salt, function(err, hash){
