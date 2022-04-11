@@ -9,7 +9,7 @@ const passport = require('passport');
 //const connectEnsureLogin = require('connect-ensure-login');
 const User = require('./user.js');
 const ejs = require('ejs');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const flash = require('express-flash')
 const session = require('cookie-session')
 //const methodOverride = require('method-override')
@@ -266,13 +266,24 @@ app.route('/register')
 .get(function(req, res){
     res.render('pages/Register')
 });
-app.post('/register' , async(req, res) => {
+app.post('/register' , (req, res) => {
     //console.log(req.body); 
     var regData = req.body;
+    // https://www.npmjs.com/package/bcryptjs to find bcryptjs
+    bcrypt.genSalt(10, function(err, salt){
+        bcrypt.hash(regData.password, salt, function(err, hash){
+            regData.password = hash;
+            client.db("LFTU").collection("users").insertOne(regData, function(err, res){
+        
+                if(err) throw err;
+                console.log("User added");
+            });
+        })
+    })
     //Try to hash password. Comment out down to end of catch and change user to regData in insertOne
-    try{ 
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        console.log('hashed password is ', regData);
+    // try{ 
+    //     const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        //console.log('hashed password is ', regData);
     //     var user = users.push({
     //         id: Date.now().toString(),
     //         firstname: req.body.firstname,
@@ -292,18 +303,14 @@ app.post('/register' , async(req, res) => {
 
 
     //     // var user2 = {dateSubmit, firstnameSubmit, surnameSubmit, dobSubmit, usernameSubmit, passwordSubmit}
-        res.redirect('/login')
-    } catch{
-        res.redirect('/register')
-    }
+    //     res.redirect('/login')
+    // } catch{
+    //     res.redirect('/register')
+    // }
     //////////////////////////////////////////////////////////
 
     
-    client.db("LFTU").collection("users").insertOne(regData, function(err, res){
-        
-        if(err) throw err;
-        console.log("User added");
-    });
+    
     //res.redirect("/login");
 });
 
