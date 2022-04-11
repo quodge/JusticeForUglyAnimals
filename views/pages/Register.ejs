@@ -123,8 +123,14 @@
   
     .register{
       background-color: white;
+      text-align: center;
+      align-items: center;
+
     }
-  
+
+    .form{
+      align-items: left;
+    }
   
   
     </Style>
@@ -198,6 +204,7 @@
             <div class = "register">
               <hr>
             <%= message %>
+            <div class = "form">
             <form method = "POST" action="/register">
             <p><label for ="firstname"> Firstname</label><input type = "text" id = "firstname" name = "firstname" required></input></p>
             <p><label for = "surname">Surname</label><input type = "text" id = "surname" name = "surname" required></input></p>
@@ -207,6 +214,7 @@
             <p><label for ="password">Password</label><input type = "password" id = "password" name = "password" required></input></p> 
             <label for = "myEvents"></label><input type = "hidden" id = "myEvents" name = "myEvents"></input></p>
             <!-- <p>Confirm Password <input type = "text" id = "password2"></input></p> -->
+          </div>
             <input type = "submit" value = "Register" />
             <!-- onclick = "registerFunction();" /> -->
             
