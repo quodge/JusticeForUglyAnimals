@@ -43,7 +43,7 @@ client.connect(err => {
 });
 mongoose.connect(uri); 
 
-//Login-----------------------------------------------------
+
 const usersSchema = {
     firstname: String,
     surname: String, 
@@ -70,33 +70,27 @@ users.find({}, function(err, users){
     usersList: users
 })
 
-// const initializePassport = require('./passport-config');
-// initializePassport(
-//     passport, 
-//     username => users.find(user => users.username === username),
-//     id => users.find(user => user.id === id)
-// )
-
-// app.use(flash())
-// app.use(session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false
-// }))
-
-//app.use(passport.initialize())
-//app.use(passport.session())
 
 
 
 
 
+//////////////////////////////////////// HOME /////////////////////////////
 
 app.get('/', function(req, res){
     
     res.render('pages/index');
     
 });
+
+///////////////////////////////////// LOGIN//////////////////////////////
+
+app.get('/login', function(req, res) {
+    checkTokenInvalid(req, res); 
+    res.render('pages/login');    
+    
+   });
+
 
 app.post('/login', (req, res) => {
     var loginDetails = req.body;
@@ -122,39 +116,8 @@ app.post('/login', (req, res) => {
             }
         })
     })
-
-
     
 })
-/////////////////////////////////////////////////////////////
-
-
-
-// app.use(session({
-//     genid: function(req){
-//         return uuidv4();
-//     },
-//     secret: '=fmLV*U@FL`N]]~/zqtFCch.pBTGoU',
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { maxAge: 60 * 60 * 1000 }
-// }));
-
-
-
-
-//send index.html file to the user for the home page
-
-
-
-
-
-
-app.get('/login', function(req, res) {
-    checkTokenInvalid(req, res); 
-    res.render('pages/login');    
-    
-   });
 
    var loginValidate =[
        check('password').isLength({ min: 8}).withMessage('Password must be at least 8 characters')
@@ -162,7 +125,7 @@ app.get('/login', function(req, res) {
        .matches('[A-Z]').withMessage('Password must contain an uppercase letter')];
    // process the form (POST http://localhost:PORT/login)
    
-   
+///////////////////////////////////// SIGNOUT ///////////////////////////////////
 
 app.post('/signout', (req, res) => {
     console.log('Reaching /signout post')
@@ -175,6 +138,36 @@ app.post('/signout', (req, res) => {
     
     res.redirect('/');
 })
+
+//////////////////////////////////////////// REGISTER //////////////////////////////////////
+
+app.route('/register')
+.get(function(req, res){
+    checkTokenInvalid(req, res)
+    res.render('pages/Register')
+});
+app.post('/register' , (req, res) => {
+    //console.log(req.body); 
+    var regData = req.body;
+    //regData = regData + 'myEvents: [""]';
+    // https://www.npmjs.com/package/bcryptjs to find bcryptjs
+    bcrypt.genSalt(10, function(err, salt){
+        bcrypt.hash(regData.password, salt, function(err, hash){
+            regData.password = hash;
+            client.db("LFTU").collection("users").insertOne(regData, function(err, res){
+        
+                if(err) throw err;
+                console.log("User added");
+                
+            });
+        })
+    })
+    res.redirect('/login');       
+});
+
+
+
+//////////////////////////////////////////// ADMIN ///////////////////////////////////
 
 //create routes for admin section
 var adminRouter = express.Router();
@@ -193,11 +186,7 @@ adminRouter.get('/users', function(req, res){
         })
     })
     
-    //res.send('I show all the users!');
-    // var output = 'getting the login! ';
-    // var input1 = req.query.input1;
-    // var input2 = req.query.input2;
-    // console.log('The params:'+ req.query.input1 + " " + req.query.input2);
+    
 });
 adminRouter.post('/users' , (req, res) => {
     checkUserIsAdmin(req, res);
@@ -232,6 +221,8 @@ adminRouter.use(function(req, res, next){
     //Continue to next part and go to route
     next();});
 
+
+////////////////////////////////////////// COMMENTS ////////////////////////////////////////////
 const commentsSchema = {
     userComment: String
 }
@@ -246,16 +237,9 @@ app.get('/comments' ,(req, res) => {
     comment.find({}, function(err, comments){
         res.render('pages/Comments', {
             commentsList: comments
-    })
-    
-  
-    
-        
+    }) 
     });
     
-// const db = client.db("LFTU");
-// var cursor = db.collection('comments').find({});
-
 
 });
 app.post('/comments' , (req, res) => {
@@ -268,7 +252,9 @@ app.post('/comments' , (req, res) => {
     })
     res.redirect('/comments');
 });
-// app.use('/comments', commentsRouter);
+
+
+///////////////////////////////////////// EVENTS ////////////////////////////////
 
 var eventsRouter = express.Router();
 eventsRouter.get('/', function(req, res){
@@ -279,6 +265,8 @@ eventsRouter.get('/', function(req, res){
 });
 app.use('/events', eventsRouter);
 
+///////////////////////////////////////// SETTINGS //////////////////////////////////
+
 var settingsRouter = express.Router();
 settingsRouter.get('/', function(req, res){
     checkTokenValid(req, res);
@@ -288,64 +276,8 @@ settingsRouter.get('/', function(req, res){
 app.use('/settings', settingsRouter);
 
 
- 
+/////////////////////////////////// UNAVAILABLE OR UNACCESSABLE /////////////////////////
 
-// var registerRouter = express.Router();
-app.route('/register')
-.get(function(req, res){
-    checkTokenInvalid(req, res)
-    res.render('pages/Register')
-});
-app.post('/register' , (req, res) => {
-    //console.log(req.body); 
-    var regData = req.body;
-    //regData = regData + 'myEvents: [""]';
-    // https://www.npmjs.com/package/bcryptjs to find bcryptjs
-    bcrypt.genSalt(10, function(err, salt){
-        bcrypt.hash(regData.password, salt, function(err, hash){
-            regData.password = hash;
-            client.db("LFTU").collection("users").insertOne(regData, function(err, res){
-        
-                if(err) throw err;
-                console.log("User added");
-                
-            });
-        })
-    })
-    res.redirect('/login');
-    //Try to hash password. Comment out down to end of catch and change user to regData in insertOne
-    // try{ 
-    //     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        //console.log('hashed password is ', regData);
-    //     var user = users.push({
-    //         id: Date.now().toString(),
-    //         firstname: req.body.firstname,
-    //         surname: req.body.surname,
-    //         dob: req.body.dob,
-    //         email:req.body.email,
-    //         username: req.body.username,
-    //         password: hashedPassword
-    //     })
-    //     var dateSubmit = Date.now().toString();
-    //     var firstnameSubmit = req.body.firstname;
-    //     var surnameSubmit = req.body.surname;
-    //     var dobSubmit = req.body.dob;
-    //     var emailSubmit = req.body.email;
-    //     var usernameSubmit = req.body.username;
-    //     var passwordSubmit = hashedPassword;
-
-
-    //     // var user2 = {dateSubmit, firstnameSubmit, surnameSubmit, dobSubmit, usernameSubmit, passwordSubmit}
-    //     res.redirect('/login')
-    // } catch{
-    //     res.redirect('/register')
-    // }
-    //////////////////////////////////////////////////////////
-
-    
-    
-    //res.redirect("/login");
-});
 
 app.get('/pageUnavailable', function(req, res){
     
@@ -354,7 +286,11 @@ app.get('/pageUnavailable', function(req, res){
 
 app.get('/unauthorised', function(req, res){
     res.render('pages/NotAdmin');
-})
+});
+
+
+
+/////////////////////////////////// OTHER METHODS ////////////////////////////////////
 
 function checkTokenValid(req, res){
     const token = req.cookies.token
