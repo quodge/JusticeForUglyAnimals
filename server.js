@@ -398,6 +398,17 @@ function checkTokenValid(req, res){
         res.send(res.send('Other issue accessing token'))
         return res.status(400).end()
     }
+
+    const newToken = jwt.sign({ username }, jwtKey, {
+        algorithm: "HS256",
+        expiresIn: jwtExpirySeconds,
+    })
+    console.log("token = ", newToken)
+    res.cookie("token", newToken, {maxAge: jwtExpirySeconds * 1000})
+
+
+
+
 }
 
 function checkTokenInvalid(req, res){
