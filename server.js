@@ -15,7 +15,7 @@ const session = require('cookie-session')
 const cookieParser = require("cookie-parser")
 const jwt = require("jsonwebtoken")
 //const methodOverride = require('method-override')
-
+const jwt_decode = require("jwt-decode");
 var app = express();
 const PORT = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
@@ -209,11 +209,8 @@ var adminRouter = express.Router();
 adminRouter.get('/', function(req, res){
     checkTokenValid(req, res)
     var currentToken = req.cookies.token;
-    var base64Url = currentToken.split('.')[1];
-    var decodedValue = JSON.parse(window.atob(base64Url));
-    var value = ""
-    value += JSON.parse(decodedValue)
-    res.send("The username is " + value);
+    var decoded = jwt_decode(currentToken);
+    res.send("The username is " + decoded);
     // const decodedToken = jwt.decode(token,  {
     //     complete: true
     // });
