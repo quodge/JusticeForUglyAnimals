@@ -289,6 +289,11 @@ app.get('/unauthorised', function(req, res){
 });
 
 
+app.get('/alreadyLoggedIn', function(req, res){
+    res.render('pages/AlreadyIn');
+})
+
+
 
 /////////////////////////////////// OTHER METHODS ////////////////////////////////////
 
@@ -355,7 +360,7 @@ function checkTokenInvalid(req, res){
     const token = req.cookies.token
 
     if(token){
-        res.send('Already logged in')
+        res.redirect('/AlreadyLoggedIn')
         
     }
 }
