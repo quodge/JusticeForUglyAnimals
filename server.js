@@ -275,6 +275,7 @@ app.post('/register' , (req, res) => {
         
                 if(err) throw err;
                 console.log("User added");
+                res.redirect('/login')
             });
         })
     })
