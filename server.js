@@ -101,10 +101,10 @@ app.post('/login', (req, res) => {
             else{
                 const token = jwt.sign({ username }, jwtKey, {
                     algorithm: "HS256",
-                    expiresIn: jwtExpirySeconds,
+                    expiresIn: 600,
                 })
                 console.log("token = ", token)
-                res.cookie("token", token, {maxAge: jwtExpirySeconds * 1000})
+                res.cookie("token", token, {maxAge: 600 * 1000})
                 res.redirect('/');
             }
         })
