@@ -158,12 +158,12 @@ app.post('/register' , async (req, res) => {
     await client.db("LFTU").collection("users").findOne({username: regData.username}, function(err, user){
         
         if (err) throw err;
-        if(user.username != null){
+        if(user != null){
             duplicateName = user.username;
         }
         
 
-        console.log('User is ' + duplicateName);
+        //console.log('User is ' + duplicateName);
 
 
         if(regData.username == duplicateName){
