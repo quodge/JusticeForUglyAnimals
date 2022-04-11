@@ -149,12 +149,13 @@ app.route('/register')
         message: message
     })
 });
-app.post('/register' , (req, res) => {
+app.post('/register' , async (req, res) => {
     //console.log(req.body); 
     var regData = req.body;
     var message = "";
     var duplicateName = "";
-    client.db("LFTU").collection("users").findOne({username: regData.username}, function(err, user){
+    var duplicate = true
+    await client.db("LFTU").collection("users").findOne({username: regData.username}, function(err, user){
         
         if (err) throw err;
         duplicateName = user.username;
@@ -167,15 +168,10 @@ app.post('/register' , (req, res) => {
                 message: message
             });
             
-        }
-       
-        
-    
-        
-    
-        //regData = regData + 'myEvents: [""]';
-        // https://www.npmjs.com/package/bcryptjs to find bcryptjs
-        bcrypt.genSalt(10, function(err, salt){
+        } else{
+            //regData = regData + 'myEvents: [""]';
+            // https://www.npmjs.com/package/bcryptjs to find bcryptjs
+            bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(regData.password, salt, function(err, hash){
                 regData.password = hash;
                 client.db("LFTU").collection("users").insertOne(regData, function(err, res){
@@ -187,6 +183,15 @@ app.post('/register' , (req, res) => {
             })
         })
         res.redirect('/login');
+
+
+        }
+       
+        
+    
+        
+    
+        
 
     })
     
