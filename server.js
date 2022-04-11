@@ -350,7 +350,7 @@ app.post('/register' , (req, res) => {
 });
 
 app.get('/pageUnavailable', function(req, res){
-    res.render(pages/NotLoggedIn);
+    res.render('pages/NotLoggedIn');
 });
 //app.use('/register', registerRouter);
 
