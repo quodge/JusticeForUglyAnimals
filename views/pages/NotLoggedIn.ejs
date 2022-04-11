@@ -1,0 +1,183 @@
+<html>
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Love For The Uglies</title>
+
+  <link href="https://whispering-earth-86255.herokuapp.com/styles" rel="stylesheet" type="text/css">
+
+  <Style>
+    .overlay {
+      position: absolute;
+  
+    }
+  
+    /* .PhotoLinkContainer img: hover {
+      opacity: .5;
+      position: absolute;
+    } */
+  
+  
+  
+    .HyperlinkImageText{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  
+  
+  
+  
+  
+    h2{
+      text-align: center;
+      font-size: 45px;
+      color: purple;
+      font-family: 'Roboto Condensed', sans-serif;
+    }
+  
+    .homepageInfo{
+      background-color: white;
+      margin-right: 20px;
+      margin-left:20px;
+    }
+    
+    h3{
+      text-align:left;
+      font-size:30px;
+      color: purple;
+      font-family: 'Roboto Condensed', sans-serif;
+    }
+    h4{
+      text-align: left;
+      font-size: 15px;
+      color:purple;
+      font-family: 'Roboto Condensed', sans-serif;
+    }
+  
+  /*
+    .zoom {
+    padding: 50px;
+  
+    transition: transform .2s;
+    float:left;
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport)
+  }
+  */
+  
+    /* Three image containers (use 25% for four, and 50% for two, etc) */
+    .column {
+      float: left;
+      width: 19%;
+      padding: 5px;
+    }
+  
+    /* Style the images inside the grid */
+    .column img {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+  
+    .column img:hover {
+      opacity: 1;
+    }
+  
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  
+    /* The expanding image container (positioning is needed to position the close button and the text) */
+    .contain {
+      position: relative;
+      display: none;
+    }
+  
+    /* Expanding image text */
+    #imgtext {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      color: white;
+      font-size: 20px;
+    }
+  
+    /* Closable button inside the image */
+    .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: white;
+      font-size: 35px;
+      cursor: pointer;
+    }
+  
+  
+  
+  
+    </Style>
+
+
+
+
+
+
+</head>
+<body>
+
+    <header>
+        <div class = "container">
+            <a class = "NavBarTitle" href ="https://whispering-earth-86255.herokuapp.com/">Love For The Uglies</a>
+</div>
+</header>
+<hr>
+    <h2>Please log in to view this page</h2> 
+
+        <hr>
+        <a class = "LoginRegisterButton" href="https://whispering-earth-86255.herokuapp.com/login"><button>Login</button>
+          </a>
+        <a class = "LoginRegisterButton" href="https://whispering-earth-86255.herokuapp.com/register"><button>Register</button></a>
+    </header>
+    <hr>
+
+    <a class="image-link" href="https://whispering-earth-86255.herokuapp.com/images/image5"><img src="https://whispering-earth-86255.herokuapp.com/images/image5" style="width:99%" onclick="myFunction(this);"></a>
+
+    <script>
+        function myFunction(imgs) {
+        // Get the expanded image
+        var expandImg = document.getElementById("expandedImg");
+        // Get the image text
+        var imgText = document.getElementById("imgtext");
+        // Use the same src in the expanded image as the image being clicked on from the grid
+        expandImg.src = imgs.src;
+        // Use the value of the alt attribute of the clickable image as text inside the expanded image
+        imgText.innerHTML = imgs.alt;
+        // Show the container element (hidden with CSS)
+        expandImg.parentElement.style.display = "block";
+}
+
+$(document).ready(function() {
+$('.image-link').magnificPopup({type:'image'});
+});
+
+    </script>
+    
+
+    
+
+    
+
+
+
+
+</body>
+</html>
+

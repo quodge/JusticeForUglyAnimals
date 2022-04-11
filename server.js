@@ -349,13 +349,16 @@ app.post('/register' , (req, res) => {
     //res.redirect("/login");
 });
 
+app.get('/pageUnavailable', function(req, res){
+    res.render(pages/NotLoggedIn);
+});
 //app.use('/register', registerRouter);
 
 function checkTokenValid(req, res){
     const token = req.cookies.token
 
     if(!token){
-        res.send('Cant find a token')
+        res.redirect('/pageUnavailable')
         return res.status(401).end()
     }
 
@@ -428,6 +431,9 @@ imageRouter.get('/image4', function(req, res){
 imageRouter.get('/image5', function(req, res){
     res.sendFile(__dirname + '/images/photo5.jpg')
 });
+imageRouter.get('/sadDog', function(req, res){
+    res.sendFile(__dirname, + /images/sadDog.jpg)
+})
 
 app.use('/images', imageRouter);
 
