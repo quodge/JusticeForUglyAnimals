@@ -158,12 +158,12 @@ app.post('/register' , (req, res) => {
         
         if (err) throw err;
         duplicateName = user;
-        db.close();
+        
 
 
     })
     
-    if(regData.username == result){
+    if(regData.username == duplicateName){
         message = "username already in use";
         res.render('pages/Register', {
             message: message
