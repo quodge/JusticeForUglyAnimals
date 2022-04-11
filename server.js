@@ -210,7 +210,8 @@ adminRouter.get('/', function(req, res){
     checkTokenValid(req, res)
     var currentToken = req.cookies.token;
     var decoded = jwt_decode(currentToken);
-    res.send("The username is " + decoded);
+    var value = JSON.stringify(decoded);
+    res.send("The username is " + value);
     // const decodedToken = jwt.decode(token,  {
     //     complete: true
     // });
