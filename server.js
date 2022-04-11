@@ -209,7 +209,7 @@ adminRouter.get('/', function(req, res){
     const token = req.cookies.token;
     var tokenUsername = "";
     jwt.verify(token, jwtKey, (err, decodedToken) => {
-        tokenUsername = decodedToken._id
+        tokenUsername = JSON.stringify(decodedToken.id)
         console.log("The username is" + JSON.stringify(decodedToken));
     })
     console.log("The username is" + tokenUsername);
