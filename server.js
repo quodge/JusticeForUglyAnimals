@@ -248,6 +248,7 @@ app.get('/comments' ,(req, res) => {
     const token = req.cookies.token
 
     if(!token){
+        res.send('Cant find a token')
         return res.status(401).end()
     }
 
@@ -257,8 +258,10 @@ app.get('/comments' ,(req, res) => {
         payload = jwt.verify(token, jwtKey)
     }catch (e){
         if(e instanceof jwt.JsonWebTokenError){
+            res.send('Credentials invalid')
             return res.status(401).end()
         }
+        res.send(res.send('Other issue accessing token'))
         return res.status(400).end()
     }
     
