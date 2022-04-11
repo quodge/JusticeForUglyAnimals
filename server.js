@@ -109,7 +109,8 @@ app.post('/login', (req, res) => {
                 res.send("Incorrect password");
             }
             else{
-                const token = jwt.sign({ username }, jwtKey, {
+                const id = username
+                const token = jwt.sign({ id }, jwtKey, {
                     algorithm: "HS256",
                     expiresIn: jwtExpirySeconds,
                 })
@@ -205,7 +206,14 @@ var adminRouter = express.Router();
 //admin main page. the dashboard (http://locahost:PORT/admin)
 adminRouter.get('/', function(req, res){
     checkTokenValid(req, res)
-
+    const token = req.cookies.token;
+    const tokenUsername = "";
+    jwt.verify(token, jwtKey, (err, decodedToken) => {
+        tokenUsername = decodedToken.id
+       
+    })
+    console.log(tokenUsername);
+    //if(tokenUsername == "Admin")
     console.log("The token is" + token);
     res.render('pages/Admin');
 });
