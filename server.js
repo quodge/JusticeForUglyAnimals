@@ -64,29 +64,27 @@ users.find({}, function(err, users){
     usersList: users
 })
 
-const initializePassport = require('./passport-config');
-initializePassport(
-    passport, 
-    username => users.find(user => users.username === username),
-    id => users.find(user => user.id === id)
-)
+// const initializePassport = require('./passport-config');
+// initializePassport(
+//     passport, 
+//     username => users.find(user => users.username === username),
+//     id => users.find(user => user.id === id)
+// )
 
-app.use(flash())
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-}))
+// app.use(flash())
+// app.use(session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false
+// }))
 
-app.use(passport.initialize())
-app.use(passport.session())
+//app.use(passport.initialize())
+//app.use(passport.session())
 
 
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
-}))
+app.post('/login', (req, res) => {
+    
+})
 /////////////////////////////////////////////////////////////
 
 
