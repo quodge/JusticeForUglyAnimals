@@ -144,7 +144,10 @@ app.post('/signout', (req, res) => {
 app.route('/register')
 .get(function(req, res){
     checkTokenInvalid(req, res)
-    res.render('pages/Register')
+    var message = "";
+    res.render('pages/Register', {
+        message: message
+    })
 });
 app.post('/register' , (req, res) => {
     //console.log(req.body); 
