@@ -109,10 +109,10 @@ app.post('/login', (req, res) => {
                 res.send("Incorrect password");
             }
             else{
-                var id = "";
-                id = id + username;
+                var userName = "";
+                userName = userName + username;
 
-                const token = jwt.sign({ username, id: id }, jwtKey, {
+                const token = jwt.sign({ username: userName }, jwtKey, {
                     algorithm: "HS256",
                     expiresIn: jwtExpirySeconds,
                 })
@@ -181,17 +181,17 @@ var adminRouter = express.Router();
 //admin main page. the dashboard (http://locahost:PORT/admin)
 adminRouter.get('/', function(req, res){
     checkTokenValid(req, res)
-    // var currentToken = req.cookies.token;
+    var currentToken = req.cookies.token;
     // var decoded = jwt_decode(currentToken);
     // var value = JSON.stringify(decoded);
     // res.send("The username is " + value);
-    // const decodedToken = jwt.decode(token,  {
-    //     complete: true
-    // });
-    // if(!decodedToken){
-    //     res.send("Not a token")
-    // }
-    // res.send("The token is" + JSON.stringify(decodedToken) );
+    const decodedToken = jwt.decode(token,  {
+        complete: true
+    });
+    if(!decodedToken){
+        res.send("Not a token")
+    }
+    res.send("The token is" + JSON.stringify(decodedToken) );
     
     //if(tokenUsername == "Admin")
     
@@ -375,8 +375,8 @@ function checkTokenValid(req, res){
         res.send(res.send('Other issue accessing token'))
         return res.status(400).end()
     }
-
-    const newToken = jwt.sign({ username }, jwtKey, {
+    res.send('The username : ' + payload.username);
+    const newToken = jwt.sign({ username: payload.username }, jwtKey, {
         algorithm: "HS256",
         expiresIn: jwtExpirySeconds,
     })
