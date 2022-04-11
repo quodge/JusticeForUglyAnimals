@@ -147,21 +147,13 @@ app.post('/login', (req, res) => {
 
 
 
-// var loginRouter = express.Router();
-// loginRouter.get('/', function(req, res){
-//     res.sendFile(__dirname + '/login.html')
-// });
-// app.use('/login', loginRouter);
+
+
 
 app.get('/login', function(req, res) {
     checkTokenInvalid(req, res); 
     res.render('pages/login');    
-    //    var output = 'getting the login! ';
-    //    var input1 = req.query.input1;
-    //    var input2 = req.query.input2;
-    //    console.log('The params:'+ req.query.input1 + " " + req.query.input2);
-      
-    //res.send('Login Page working')
+    
    });
 
    var loginValidate =[
@@ -170,48 +162,24 @@ app.get('/login', function(req, res) {
        .matches('[A-Z]').withMessage('Password must contain an uppercase letter')];
    // process the form (POST http://localhost:PORT/login)
    
-   //Old unused post login method /////////////////////////////////////
-//    app.post('/login', (req, res) => {
+   
 
-//     req.session.username = req.body.username;
-//     res.send(`Hello ${req.session.username}. Your session ID is ${req.sessionID} and session expires in ${req.session.cookie.maxAge} milliseconds. `);
-//         // const errors = validationResult(req);
-//         // if(!errors.isEmpty()){
-//         //     return res.status(422).json({errors:errors.array()});
-//         // }
-//         // else{
-//         //     let username = req.body.username;
-//         //     let password = req.body.password;
-//         //     res.send('Username:' + username + 'Password:' + password);
-//         // }
-//  });
- /////////////////////////////////////////////////////////////////////////
-
-// app.route('/register-process')
-//     .get(function(req, res){
-//         res.send('Processing registration')
-//         var output = 'Getting register details';
-//         var firstname = req.query.firstname;
-//         var surname = req.query.surname;
-//         console.log('First and surname are ' + req.query.firstname + " " + req.query.surname);
-//     })
-//     .post(function(req, res) { console.log('processing');
-//     res.send('processing the registration form!');
-//  });
-
-
-
-
+app.post('/signout', function(req, res){
+    document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    localStorage.removeItem('token')
+    sessionStorage.removeItem('token')
+    res.redirect('/');
+})
 
 //create routes for admin section
 var adminRouter = express.Router();
 //admin main page. the dashboard (http://locahost:PORT/admin)
 adminRouter.get('/', function(req, res){
     checkTokenValid(req, res)
-    var currentToken = req.cookies.token;
-    var decoded = jwt_decode(currentToken);
-    var value = JSON.stringify(decoded);
-    res.send("The username is " + value);
+    // var currentToken = req.cookies.token;
+    // var decoded = jwt_decode(currentToken);
+    // var value = JSON.stringify(decoded);
+    // res.send("The username is " + value);
     // const decodedToken = jwt.decode(token,  {
     //     complete: true
     // });
