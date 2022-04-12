@@ -86,21 +86,31 @@ app.get('/', function(req, res){
 ///////////////////////////////////// LOGIN//////////////////////////////
 
 app.get('/login', function(req, res) {
-    checkTokenInvalid(req, res); 
-    res.render('pages/login');    
+    checkTokenInvalid(req, res);
+    var message = ""; 
+    res.render('pages/login', {
+        message: message
+    });    
     
    });
 
 
 app.post('/login', (req, res) => {
     var loginDetails = req.body;
+    var message = "";
     client.db("LFTU").collection("users").findOne({username: loginDetails.username}, function(err, user){
         if(user == undefined){
-            res.send("Username not found");
+            message = "Username not found";
+            res.render('pages/login', {
+                message: message
+            });
         }
         bcrypt.compare(loginDetails.password, user.password, function(err, access){
             if(access == false){
-                res.send("Incorrect password");
+                message = "Password incorrect";
+                res.render('pages/login', {
+                    message: message
+                });
             }
             else{
                 var userName = loginDetails.username;
