@@ -168,7 +168,12 @@ app.post('/register' , async (req, res) => {
         } else{
             //regData = regData + 'myEvents: [""]';
             // https://www.npmjs.com/package/bcryptjs to find bcryptjs
-            // if(regData.password != )
+            if(regData.password != confirmPass){
+                message = "Passwords do not match";
+            res.render('pages/Register', {
+                message: message
+            });
+            }
 
             bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(regData.password, salt, function(err, hash){
