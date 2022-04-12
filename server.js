@@ -303,7 +303,7 @@ eventsRouter.get('/', async function(req, res){
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         if(user.myEvents != null && user.myEvent != ""){
             const eventDB = user.myEvents.toString();
-            event = "Events signed up to:  \"" + eventDB + "\""
+            event = "Events signed up to:  \"" + "\""
         
             console.log(" in loop" + event)
             res.render('pages/Events', {
