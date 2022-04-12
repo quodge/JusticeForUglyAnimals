@@ -310,10 +310,10 @@ app.post('/addEvent', async function(req, res){
     res.redirect('/events');
 })
 
-function addEventToDB(req, res, event){
+async function addEventToDB(req, res, event){
     var username = getUserFromToken(req, res);
     var updatedEvents = "";
-    client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
+    await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         if (user.myEvents != ""){
             updatedEvents = updatedEvents + user.myEvents ;
             console.log("in addEventToDB updatedEvents = " + updatedEvents)
