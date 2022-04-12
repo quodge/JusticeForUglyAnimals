@@ -21,5 +21,6 @@ Available log in details use:
 •	admin username: AdminLFTU; password: lftuRGU304 
 •	You can also create your own user to test
 
-The events page can only add one event to the ‘myEvents’ section at one time as making a list of events to hold in the database was not possible.
-The comments page works as expected
+The events page stopped working near to the deadline and was unable to be fixed in time. The code outputting the events from the database was causing errors which could crash the site. This code was therefore commented out to ensure the site does not crash.
+This functionality was working during the demo but likely had errors which were exacerbated during the demo.
+
