@@ -280,14 +280,14 @@ eventsRouter.get('/', async function(req, res){
     var username = getUserFromToken(req, res);
     var event;
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
-        const eventDB = user.myEvents + ","
+        const eventDB = user.myEvents
         event = "You have signed up for the event \"" + eventDB + "\""
         
         console.log(" in loop" + event)
         res.render('pages/Events', {
             myEvent:event
         })
-    }) 
+    })
     console.log("out loop" + event)
     
 
@@ -311,38 +311,38 @@ app.post('/addEvent', async function(req, res){
 
     //allEvents = newEvent + previous;
     //console.log('1 Body contains' + req.body.myEvents)
-    const updatedEvents = await addEventToDB(req, res, newEvent);
-    console.log('4 All events in main code = ' + updatedEvents)
-    await updateEventByName(client, username, {myEvents: updatedEvents});
+    await addEventToDB(req, res, newEvent);
+    //console.log('4 All events in main code = ' + allEvents)
+    await updateEventByName(client, username, {myEvents: req.body.myEvents});
 
     res.redirect('/events');
 })
 
 async function addEventToDB(req, res, event){
     var username = getUserFromToken(req, res);
-    var updatedEvents = "";
+//     var updatedEvents = "";
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
-        const newEvent = event
-        console.log(newEvent)
+        event = "You have signed up for the event \"" + event + "\""
+        console.log(event)
 //         console.log('user details' + user.myEvents)
-        if (user.myEvents == "" || user.myEvents == null){
-            updatedEvents = newEvent;
+//         if (user.myEvents == "" || user.myEvents == null){
+//             updatedEvents = event;
 //             console.log("2 in addEventToDB updatedEvents = " + updatedEvents)
-            // updatedEvents = "" + updatedEvents + event + ", ";
+//             // updatedEvents = "" + updatedEvents + event + ", ";
 //             console.log("3 Then in addEventToDB updatedEvents = " + updatedEvents)
-            return updatedEvents
-        }
-        else{
+//             return updatedEvents
+        })
+//         else{
 //             updatedEvents = "";
-            const previousEvents = user.myEvents;
+//             previousEvents = user.myEvents;
 //             console.log('5 Previous : ' + previousEvents)
-            updatedEvents = previousEvents + ', ' + event;
+//             updatedEvents = previousEvents + ', ' + event;
 //             console.log('6 updated events ' + updatedEvents)
-            return updatedEvents
-        }
+//             return updatedEvents
+//         }
 //         return user.myEvents
         
-    })
+//     })
 }
 
 //https://www.mongodb.com/developer/quickstart/node-crud-tutorial/
