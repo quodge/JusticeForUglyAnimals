@@ -273,18 +273,14 @@ app.post('/comments' , (req, res) => {
 
 
 ///////////////////////////////////////// EVENTS ////////////////////////////////
-
+var event = "You have not yet signed up for an event";
 var eventsRouter = express.Router();
 eventsRouter.get('/', async function(req, res){
     checkTokenValid(req, res);
     var username = getUserFromToken(req, res);
-    var event = 'You have not yet signed up for an event';
+    
     console.log(event)
-    await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
-        event = "You have signed up for the event \"" + user.myEvents + "\"";
-        console.log(event);
-        
-    })
+    
 
     res.render('pages/Events', {
         event: event
@@ -313,10 +309,11 @@ app.post('/addEvent', async function(req, res){
     res.redirect('/events');
 })
 
-// async function addEventToDB(req, res, event){
-//     var username = getUserFromToken(req, res);
+async function addEventToDB(req, res, event){
+    var username = getUserFromToken(req, res);
 //     var updatedEvents = "";
-//     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
+    await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
+        event = "You have signed up for the event \"" + user.myEvents + "\""
 //         console.log('user details' + user.myEvents)
 //         if (user.myEvents == "" || user.myEvents == null){
 //             updatedEvents = event;
@@ -324,7 +321,7 @@ app.post('/addEvent', async function(req, res){
 //             // updatedEvents = "" + updatedEvents + event + ", ";
 //             console.log("3 Then in addEventToDB updatedEvents = " + updatedEvents)
 //             return updatedEvents
-//         }
+        })
 //         else{
 //             updatedEvents = "";
 //             previousEvents = user.myEvents;
@@ -336,12 +333,13 @@ app.post('/addEvent', async function(req, res){
 //         return user.myEvents
         
 //     })
-// }
+}
 
 //https://www.mongodb.com/developer/quickstart/node-crud-tutorial/
 async function updateEventByName(client, username, updatedUser){
     client.db("LFTU").collection("users").updateOne({username: username }, {$set: updatedUser}, function(err, res){
         if (err) throw err;
+        
         console.log(`${res.matchedCount} document(s) matched the query criteria.`);
         console.log(`${res.modifiedCount} document(s) was/were updated.`);
         
