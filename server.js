@@ -283,7 +283,7 @@ eventsRouter.get('/', async function(req, res){
         event = "You have signed up for the event \"" + user.myEventsevent + "\""
         console.log(" in loop" + event)
         res.render('pages/Events', {
-            event:event
+            myEvent:event
         })
     })
     console.log("out loop" + event)
