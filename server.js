@@ -275,7 +275,7 @@ app.post('/comments' , (req, res) => {
 ///////////////////////////////////////// EVENTS ////////////////////////////////
 
 var eventsRouter = express.Router();
-eventsRouter.get('/', function(req, res){
+eventsRouter.get('/', async function(req, res){
     checkTokenValid(req, res);
     var username = getUserFromToken(req, res);
     var event;
