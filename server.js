@@ -301,7 +301,7 @@ app.use('/events', eventsRouter);
 app.post('/addEvent', function(req, res){
     checkTokenValid(req, res);
     newEvent = req.body
-    console.log('Body contains' + req.body)
+    console.log('Body contains' + req.body.event1)
     //addEventToDB(req, res, )
 
 
