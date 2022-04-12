@@ -314,11 +314,17 @@ function addEventToDB(req, res, event){
     var username = getUserFromToken(req, res);
     var updatedEvents = "";
     client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
-        updatedEvents = updatedEvents + user.myEvents ;
-        console.log("in addEventToDB updatedEvents = " + updatedEvents)
-        updatedEvents = updatedEvents + event + ", ";
-        console.log("Then in addEventToDB updatedEvents = " + updatedEvents)
-        return updatedEvents
+        if (user.myEvents != ""){
+            updatedEvents = updatedEvents + user.myEvents ;
+            console.log("in addEventToDB updatedEvents = " + updatedEvents)
+            updatedEvents = updatedEvents + event + ", ";
+            console.log("Then in addEventToDB updatedEvents = " + updatedEvents)
+            return updatedEvents
+        }
+        else{
+            return event
+        }
+        
     })
 }
 
