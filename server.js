@@ -157,8 +157,8 @@ app.post('/register' , async (req, res) => {
         
 
         //console.log('User is ' + duplicateName);
-
-
+        var usernameHere = regData.username;
+        regData.username = usernameHere.toLowerCase();
         if(regData.username == duplicateName){
             message = "username already in use";
             res.render('pages/Register', {
@@ -166,6 +166,7 @@ app.post('/register' , async (req, res) => {
             });
             
         } else{
+
             //regData = regData + 'myEvents: [""]';
             // https://www.npmjs.com/package/bcryptjs to find bcryptjs
             if(regData.password != regData.confirmPass){
