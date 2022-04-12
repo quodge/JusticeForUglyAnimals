@@ -128,13 +128,8 @@ app.post('/login', (req, res) => {
 ///////////////////////////////////// SIGNOUT ///////////////////////////////////
 
 app.post('/signout', (req, res) => {
-    console.log('Reaching /signout post')
-    const newToken = jwt.sign({}, jwtKey, {
-        algorithm: "HS256",
-        expiresIn: 0,
-    })
-    console.log("token = ", newToken)
-    res.cookie("token", newToken, {maxAge: 0 * 1000})
+    
+    createExpiredToken(req, res);
     
     res.redirect('/');
 })
@@ -330,7 +325,7 @@ app.post('/deleteAccount', async function(req, res){
     //res.send('The username is ' + payload.username)
 
     await client.db("LFTU").collection("users").deleteOne({username: payload.username});
-    res.redirect('/signout');
+    res.redirect('/');
     })
 
 
@@ -423,6 +418,14 @@ function checkTokenInvalid(req, res){
     }
 }
 
+function createExpiredToken(req, res){
+    const newToken = jwt.sign({}, jwtKey, {
+        algorithm: "HS256",
+        expiresIn: 0,
+    })
+    console.log("token = ", newToken)
+    res.cookie("token", newToken, {maxAge: 0 * 1000})
+}
 
 
 
@@ -430,8 +433,7 @@ function checkTokenInvalid(req, res){
 
 
 
-
-
+/////////////////////////////////// css and images //////////////////////////////
 
 var cssRouter = express.Router();
 cssRouter.get('/', function(req, res){
@@ -464,7 +466,7 @@ imageRouter.get('/sadDog', function(req, res){
 
 app.use('/images', imageRouter);
 
-//Start server
+///////////////////////////////////// start server //////////////////////////////////////
 app.listen(PORT);
 console.log('Express Server running at http://127.0.0.1:'.PORT);
 
