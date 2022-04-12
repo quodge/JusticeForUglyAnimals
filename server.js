@@ -311,7 +311,7 @@ app.post('/addEvent', async function(req, res){
 
     //allEvents = newEvent + previous;
     //console.log('1 Body contains' + req.body.myEvents)
-    const updatedEvetns = await addEventToDB(req, res, newEvent);
+    const updatedEvents = await addEventToDB(req, res, newEvent);
     //console.log('4 All events in main code = ' + allEvents)
     await updateEventByName(client, username, {myEvents: updatedEvents});
 
