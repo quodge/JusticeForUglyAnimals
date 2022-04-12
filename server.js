@@ -287,9 +287,9 @@ app.use('/events', eventsRouter);
 app.post('/addEvent', async function(req, res){
     checkTokenValid(req, res);
     var username = getUserFromToken(req, res);
-    newEvent = "" + req.body.myEvents
-    var previous = "";
-    await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
+    //newEvent = "" + req.body.myEvents
+    //var previous = "";
+    await client.db("LFTU").collection("users").findOne({username: req.body.myEvents}, function(err, user){
         console.log('user details' + user.myEvents)
         previous=  user.myEvents
         
