@@ -1,13 +1,12 @@
 //load express and create app
 var express = require('express');
 //Session tokens imports 
-//const session = require('express-session');
 const {v4:uuidv4} = require('uuid');
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
-const passport = require('passport');
+//const passportLocalMongoose = require('passport-local-mongoose');
+//const passport = require('passport');
 //const connectEnsureLogin = require('connect-ensure-login');
-const User = require('./user.js');
+//const User = require('./user.js');
 const ejs = require('ejs');
 const bcrypt = require('bcryptjs');
 const flash = require('express-flash')
@@ -15,7 +14,7 @@ const session = require('cookie-session')
 const cookieParser = require("cookie-parser")
 const jwt = require("jsonwebtoken")
 //const methodOverride = require('method-override')
-const jwt_decode = require("jwt-decode");
+//const jwt_decode = require("jwt-decode");
 var app = express();
 const PORT = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
@@ -51,29 +50,16 @@ const usersSchema = {
     email: String,
     username: String,
     password: String
-
 }
 const user = mongoose.model("User", usersSchema);
-
 const username = mongoose.model('username', usersSchema);
-
 username.find({}, function(err, users){
-     
         usernamesList: users
-
-
     })
-
 const users = mongoose.model('username', 'password', usersSchema);
-
 users.find({}, function(err, users){
     usersList: users
 })
-
-
-
-
-
 
 //////////////////////////////////////// HOME /////////////////////////////
 
@@ -315,9 +301,9 @@ async function addEventToDB(req, res, event){
     var updatedEvents = "";
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         if (user.myEvents != ""){
-            updatedEvents = updatedEvents + user.myEvents ;
+            updatedEvents = "" + updatedEvents + user.myEvents ;
             console.log("in addEventToDB updatedEvents = " + updatedEvents)
-            updatedEvents = updatedEvents + event + ", ";
+            updatedEvents = "" + updatedEvents + event + ", ";
             console.log("Then in addEventToDB updatedEvents = " + updatedEvents)
             return updatedEvents
         }
