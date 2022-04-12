@@ -304,7 +304,7 @@ app.post('/addEvent', function(req, res){
     //console.log('Body contains' + req.body.myEvents)
     addEventToDB(req, res, newEvent);
 
-    
+
     res.redirect('/events');
 })
 
@@ -316,7 +316,7 @@ function addEventToDB(req, res, event){
         updatedEvents = updatedEvents + event + ", ";
     })
 
-    client.db("LFTU").collection("users".updateOne)({username: username}, { $set: updatedEvents})
+    client.db("LFTU").collection("users").updateOne({username: username}, { $set: updatedEvents})
 }
 
 ///////////////////////////////////////// SETTINGS //////////////////////////////////
