@@ -486,7 +486,7 @@ function checkUserIsAdmin(req, res){
             })
         }
         
-        if (payload.username != AdminLFTU){
+        if (payload.username != "AdminLFTU"){
             res.redirect('/unauthorised')
         }
     }
