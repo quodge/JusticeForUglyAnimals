@@ -311,38 +311,38 @@ app.post('/addEvent', async function(req, res){
 
     //allEvents = newEvent + previous;
     //console.log('1 Body contains' + req.body.myEvents)
-    await addEventToDB(req, res, newEvent);
+    const updatedEvetns = await addEventToDB(req, res, newEvent);
     //console.log('4 All events in main code = ' + allEvents)
-    await updateEventByName(client, username, {myEvents: req.body.myEvents});
+    await updateEventByName(client, username, {myEvents: updatedEvents});
 
     res.redirect('/events');
 })
 
 async function addEventToDB(req, res, event){
     var username = getUserFromToken(req, res);
-//     var updatedEvents = "";
+    var updatedEvents = "";
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
-        event = "You have signed up for the event \"" + event + "\""
+        const event = event
         console.log(event)
 //         console.log('user details' + user.myEvents)
-//         if (user.myEvents == "" || user.myEvents == null){
-//             updatedEvents = event;
+        if (user.myEvents == "" || user.myEvents == null){
+            updatedEvents = event;
 //             console.log("2 in addEventToDB updatedEvents = " + updatedEvents)
-//             // updatedEvents = "" + updatedEvents + event + ", ";
+            // updatedEvents = "" + updatedEvents + event + ", ";
 //             console.log("3 Then in addEventToDB updatedEvents = " + updatedEvents)
-//             return updatedEvents
-        })
-//         else{
+            return updatedEvents
+        }
+        else{
 //             updatedEvents = "";
-//             previousEvents = user.myEvents;
+            const previousEvents = user.myEvents;
 //             console.log('5 Previous : ' + previousEvents)
-//             updatedEvents = previousEvents + ', ' + event;
+            updatedEvents = previousEvents + ', ' + event;
 //             console.log('6 updated events ' + updatedEvents)
-//             return updatedEvents
-//         }
+            return updatedEvents
+        }
 //         return user.myEvents
         
-//     })
+    })
 }
 
 //https://www.mongodb.com/developer/quickstart/node-crud-tutorial/
