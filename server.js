@@ -104,27 +104,29 @@ app.post('/login', (req, res) => {
             res.render('pages/login', {
                 message: message
             });
+        }else{
+            bcrypt.compare(loginDetails.password, user.password, function(err, access){
+                if(access == false){
+                    message = "Password incorrect";
+                    res.render('pages/login', {
+                        message: message
+                    });
+                }
+                else{
+                    var userName = loginDetails.username;
+                    
+    
+                    const token = jwt.sign({ username: userName }, jwtKey, {
+                        algorithm: "HS256",
+                        expiresIn: jwtExpirySeconds,
+                    })
+                    console.log("token = ", token)
+                    res.cookie("token", token, {maxAge: jwtExpirySeconds * 1000})
+                    res.redirect('/');
+                }
+            })
         }
-        bcrypt.compare(loginDetails.password, user.password, function(err, access){
-            if(access == false){
-                message = "Password incorrect";
-                res.render('pages/login', {
-                    message: message
-                });
-            }
-            else{
-                var userName = loginDetails.username;
-                
-
-                const token = jwt.sign({ username: userName }, jwtKey, {
-                    algorithm: "HS256",
-                    expiresIn: jwtExpirySeconds,
-                })
-                console.log("token = ", token)
-                res.cookie("token", token, {maxAge: jwtExpirySeconds * 1000})
-                res.redirect('/');
-            }
-        })
+        
     })
     
 })
