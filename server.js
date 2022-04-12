@@ -281,14 +281,17 @@ eventsRouter.get('/', async function(req, res){
     var event;
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         event = "You have signed up for the event \"" + event + "\""
-        console.log(event)
+        console.log(" in loop" + event)
+        res.render('pages/Events', {
+            event:event
+        })
     })
-    console.log(event)
+    console.log("out loop" + event)
     
 
-    res.render('pages/Events', {
-        event: event
-    })
+    //res.render('pages/Events', {
+      //  event: event
+   // })
 });
 app.use('/events', eventsRouter);
 
