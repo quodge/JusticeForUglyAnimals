@@ -149,9 +149,10 @@
       margin:auto;
     }
 
-    /* body{
-      align-items: center;
-    } */
+    #form{
+      align-items: left;
+      list-style-type: none;
+    }
   
     </Style>
 
@@ -226,7 +227,7 @@
             <%= message %>
             <div class = "form">
             <form method = "POST" action="/register">
-              <ul>
+              <ul id="form">
             <li><p><label for ="firstname"> Firstname</label><input type = "text" id = "firstname" name = "firstname" required></input></p></li>
             <li><p><label for = "surname">Surname</label><input type = "text" id = "surname" name = "surname" required></input></p></li>
             <li><p><label for = "dob">Date of Birth</label><input type = "date" id = "dob" name = "dob" requried></p></li>
