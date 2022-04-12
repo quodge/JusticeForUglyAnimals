@@ -124,7 +124,7 @@
 
 <hr>
 <div class = "list">
-      <form method="POST" action = "/addEvent">
+      
         <ul>
             <h2> Events</h2>
             <li>
@@ -135,7 +135,10 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                         Ut sit amet arcu cursus mi molestie varius. Duis nec ullamcorper
                          sem. Vivamus a sem lorem. Suspendisse cursus nibh posuere urna</p>
-                         <button input type = "submit" name = "submit1" id = "submit1">Sign Up!</input></button>
+                         <form method="POST" action = "/addEvent">
+                        <label for = "eventname"></label><input type = "hidden" id = "myEvents" name = "myEvents" onClick="set1()"></input></p>
+                         <button input type = "submit" name = "event1" id = "event1">Sign Up!</input></button>
+                        </form>
             </li>
             <hr>
             <li>
@@ -146,7 +149,10 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                         Ut sit amet arcu cursus mi molestie varius. Duis nec ullamcorper
                          sem. Vivamus a sem lorem. Suspendisse cursus nibh posuere urna</p>
-                         <button input type = "submit" name = "submit2" id = "submit2">Sign Up!</input></button>
+                         <form method="POST" action = "/addEvent">
+                          <label for = "eventname"></label><input type = "hidden" id = "myEvents" name = "myEvents" onClick="set2()"></input></p>
+                         <button input type = "submit" name = "event2" id = "event2">Sign Up!</input></button>
+                         </form>
             </li>
             <hr>
             <li>
@@ -157,7 +163,10 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                         Ut sit amet arcu cursus mi molestie varius. Duis nec ullamcorper
                          sem. Vivamus a sem lorem. Suspendisse cursus nibh posuere urna</p>
-                         <button input type = "submit" name = "submit3" id = "submit3">Sign Up!</input></button>
+                         <form method="POST" action = "/addEvent">
+                          <label for = "eventname"></label><input type = "hidden" id = "myEvents" name = "myEvents" onClick="set3()"></input></p>
+                         <button input type = "submit" name = "event3" id = "event3">Sign Up!</input></button>
+                         </form>
             </li>
             <hr>
             <li>
@@ -168,8 +177,11 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                         Ut sit amet arcu cursus mi molestie varius. Duis nec ullamcorper
                          sem. Vivamus a sem lorem. Suspendisse cursus nibh posuere urna</p>
-                         <button input type = "submit" name = "submit4" id = "submit4">Sign Up!</input></button>
-            </li>
+                         <form method="POST" action = "/addEvent">
+                          <label for = "eventname"></label><input type = "hidden" id = "myEvents" name = "myEvents" onClick="set4()"></input></p>
+                         <button input type = "submit" name = "event4" id = "event4">Sign Up!</input></button>
+                        </form>
+                        </li>
             <hr>
             <li>
                 <div class="date">
@@ -179,7 +191,10 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                         Ut sit amet arcu cursus mi molestie varius. Duis nec ullamcorper
                          sem. Vivamus a sem lorem. Suspendisse cursus nibh posuere urna</p>
-                         <button input type = "submit" name = "submit5" id = "submit5">Sign Up!</input></button>
+                         <form method="POST" action = "/addEvent">
+                          <label for = "eventname"></label><input type = "hidden" id = "myEvents" name = "myEvents" onClick="set5()"></input></p>
+                         <button input type = "submit" name = "event5" id = "event5">Sign Up!</input></button>
+                         </form>
             </li>
             <hr>
             <li>
@@ -190,7 +205,10 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                         Ut sit amet arcu cursus mi molestie varius. Duis nec ullamcorper
                          sem. Vivamus a sem lorem. Suspendisse cursus nibh posuere urna</p>
-                         <button input type = "submit" name = "submit6" id = "submit6">Sign Up!</input></button>
+                         <form method="POST" action = "/addEvent">
+                          <label for = "eventname"></label><input type = "hidden" id = "myEvents" name = "myEvents" onClick="set6()"></input></p>
+                         <button input type = "submit" name = "event6" id = "event6">Sign Up!</input></button>
+                         </form>
             </li>
             <hr>
             <li>
@@ -201,13 +219,44 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                         Ut sit amet arcu cursus mi molestie varius. Duis nec ullamcorper
                          sem. Vivamus a sem lorem. Suspendisse cursus nibh posuere urna</p>
-                         <button input type = "submit" name = "submit7" id = "submit7">Sign Up!</input></button>
+                         <form method="POST" action = "/addEvent">
+                          <label for = "eventname"></label><input type = "hidden" id = "myEvents" name = "myEvents" onClick="set7()"></input></p>
+                         <button input type = "submit" name = "event7" id = "event7">Sign Up!</input></button>
+                         </form>
             </li>
             <hr>
         </ul>
-      </form>
+      
     
     </div>
+
+
+    <script>
+      function setDefault(event, element){
+        document.getElementById(element).defaultValue = event;
+      }
+      function set1(){
+        setDefault("Event1", "element1")
+      }
+      function set2(){
+        setDefault("Event2", "element2")
+      }
+      function set3(){
+        setDefault("Event3", "element3")
+      }
+      function set4(){
+        setDefault("Event4", "element4")
+      }
+      function set5(){
+        setDefault("Event5", "element5")
+      }
+      function set6(){
+        setDefault("Event6", "element6")
+      }
+      function set7(){
+        setDefault("Event7", "element7")
+      }
+    </script>
 
 <footer>
     <div class="navbar">
