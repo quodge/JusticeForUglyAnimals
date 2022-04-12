@@ -301,7 +301,7 @@ async function addEventToDB(req, res, event){
     var updatedEvents = "";
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         console.log('user details' + user.myEvents)
-        if (user.myEvents != ""){
+        if (user.myEvents == ""){
             updatedEvents = event;
             console.log("in addEventToDB updatedEvents = " + updatedEvents)
             // updatedEvents = "" + updatedEvents + event + ", ";
