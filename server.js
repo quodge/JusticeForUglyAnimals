@@ -288,9 +288,9 @@ app.post('/addEvent', async function(req, res){
     checkTokenValid(req, res);
     var username = getUserFromToken(req, res);
     newEvent = "" + req.body.myEvents
-    console.log('Body contains' + req.body.myEvents)
+    console.log('1 Body contains' + req.body.myEvents)
     allEvents = await addEventToDB(req, res, newEvent);
-    console.log('All events in main code = ' + allEvents)
+    console.log('4 All events in main code = ' + allEvents)
     await updateEventByName(client, username, {myEvents: allEvents});
 
     res.redirect('/events');
@@ -301,16 +301,19 @@ async function addEventToDB(req, res, event){
     var updatedEvents = "";
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         console.log('user details' + user.myEvents)
-        if (user.myEvents == ""){
+        if (user.myEvents == "" || user.myEvents == null){
             updatedEvents = event;
-            console.log("in addEventToDB updatedEvents = " + updatedEvents)
+            console.log("2 in addEventToDB updatedEvents = " + updatedEvents)
             // updatedEvents = "" + updatedEvents + event + ", ";
-            console.log("Then in addEventToDB updatedEvents = " + updatedEvents)
+            console.log("3 Then in addEventToDB updatedEvents = " + updatedEvents)
             return updatedEvents
         }
         else{
             updatedEvents = "";
-            updatedEvents = user.myEvents + event
+            previousEvents = user.myEvents;
+            console.log('5 Previous : ' + previousEvents)
+            updatedEvents = previousEvents + ', ' + event;
+            console.log('6 updated events ' + updatedEvents)
             return updatedEvents
         }
         
@@ -321,8 +324,8 @@ async function addEventToDB(req, res, event){
 async function updateEventByName(client, username, updatedUser){
     client.db("LFTU").collection("users").updateOne({username: username }, {$set: updatedUser}, function(err, res){
         if (err) throw err;
-        console.log(`${result.matchedCount} document(s) matched the query criteria.`);
-        console.log(`${result.modifiedCount} document(s) was/were updated.`);
+        console.log(`${res.matchedCount} document(s) matched the query criteria.`);
+        console.log(`${res.modifiedCount} document(s) was/were updated.`);
         db.close();
     });
     
