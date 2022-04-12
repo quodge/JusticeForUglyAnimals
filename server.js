@@ -173,20 +173,22 @@ app.post('/register' , async (req, res) => {
             res.render('pages/Register', {
                 message: message
             });
+            }else{
+                bcrypt.genSalt(10, function(err, salt){
+                    bcrypt.hash(regData.password, salt, function(err, hash){
+                        regData.password = hash;
+                        client.db("LFTU").collection("users").insertOne(regData, function(err, res){
+                    
+                            if(err) throw err;
+                            console.log("User added");
+                            
+                        });
+                    })
+                })
+                res.redirect('/login');
             }
 
-            bcrypt.genSalt(10, function(err, salt){
-            bcrypt.hash(regData.password, salt, function(err, hash){
-                regData.password = hash;
-                client.db("LFTU").collection("users").insertOne(regData, function(err, res){
             
-                    if(err) throw err;
-                    console.log("User added");
-                    
-                });
-            })
-        })
-        res.redirect('/login');
         }
     })         
 });
