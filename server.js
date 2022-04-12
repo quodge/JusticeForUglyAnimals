@@ -119,11 +119,8 @@ app.post('/login', (req, res) => {
     
 })
 
-   var loginValidate =[
-       check('password').isLength({ min: 8}).withMessage('Password must be at least 8 characters')
-       .matches('[0-9]').withMessage('Password must contain a number')
-       .matches('[A-Z]').withMessage('Password must contain an uppercase letter')];
-   // process the form (POST http://localhost:PORT/login)
+   
+
    
 ///////////////////////////////////// SIGNOUT ///////////////////////////////////
 
@@ -168,29 +165,40 @@ app.post('/register' , async (req, res) => {
             });
             
         } else{
-
-            //regData = regData + 'myEvents: [""]';
-            // https://www.npmjs.com/package/bcryptjs to find bcryptjs
-            if(regData.password != regData.confirmPass){
-                message = "Passwords do not match";
-            res.render('pages/Register', {
-                message: message
-            });
-            }else{
-                regData.confirmPass = true;
-                bcrypt.genSalt(10, function(err, salt){
-                    bcrypt.hash(regData.password, salt, function(err, hash){
-                        regData.password = hash;
-                        client.db("LFTU").collection("users").insertOne(regData, function(err, res){
-                    
-                            if(err) throw err;
-                            console.log("User added");
-                            
-                        });
-                    })
+            const passwordValid = validatePassword(regData.password);
+            if(passwordValid == false){
+                message = "The password is invalid. Please use 8 or more characters, uppercase, lowercase and number";
+                res.render('pages/Register', {
+                    message: message
                 })
-                res.redirect('/login');
             }
+            else{
+            
+            // https://www.npmjs.com/package/bcryptjs to find bcryptjs
+                if(regData.password != regData.confirmPass){
+                    message = "Passwords do not match";
+                res.render('pages/Register', {
+                message: message
+                });
+                }else{
+                    regData.confirmPass = true;
+                    bcrypt.genSalt(10, function(err, salt){
+                        bcrypt.hash(regData.password, salt, function(err, hash){
+                            regData.password = hash;
+                            client.db("LFTU").collection("users").insertOne(regData, function(err, res){
+                    
+                                if(err) throw err;
+                                console.log("User added");
+                            
+                            });
+                        })
+                    })
+                    res.redirect('/login');
+                }
+
+
+            }
+            
 
             
         }
@@ -539,6 +547,12 @@ function getUserFromToken(req, res){
     return payload.username
 }
 
+function validatePassword(password){
+    
+    if(password.length < 8){
+        return false;
+    }
+}
 
 
 
