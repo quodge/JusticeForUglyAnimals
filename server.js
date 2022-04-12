@@ -322,11 +322,11 @@ async function addEventToDB(req, res, event){
     var username = getUserFromToken(req, res);
     var updatedEvents = "";
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
-        const event = event
-        console.log(event)
+        const newEvent = event
+        console.log(newEvent)
 //         console.log('user details' + user.myEvents)
         if (user.myEvents == "" || user.myEvents == null){
-            updatedEvents = event;
+            updatedEvents = newEvent;
 //             console.log("2 in addEventToDB updatedEvents = " + updatedEvents)
             // updatedEvents = "" + updatedEvents + event + ", ";
 //             console.log("3 Then in addEventToDB updatedEvents = " + updatedEvents)
