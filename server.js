@@ -85,7 +85,7 @@ app.post('/login', (req, res) => {
     var loginDetails = req.body;
     var message = "";
     var thisUsername = req.body.username;
-    thisUsername.toLowerCase();
+    thisUsername = thisUsername.toLowerCase();
     client.db("LFTU").collection("users").findOne({username: thisUsername}, function(err, user){
         if(user == undefined){
             message = "Username not found";
@@ -177,6 +177,7 @@ app.post('/register' , async (req, res) => {
                 message: message
             });
             }else{
+                regData.confirmPass = true;
                 bcrypt.genSalt(10, function(err, salt){
                     bcrypt.hash(regData.password, salt, function(err, hash){
                         regData.password = hash;
