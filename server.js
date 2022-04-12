@@ -83,7 +83,7 @@ app.get('/', function(req, res){
     
 });
 
-///////////////////////////////////// LOGIN//////////////////////////////
+///////////////////////////////////// LOGIN //////////////////////////////
 
 app.get('/login', function(req, res) {
     checkTokenInvalid(req, res);
@@ -297,6 +297,28 @@ eventsRouter.get('/', function(req, res){
 });
 app.use('/events', eventsRouter);
 
+
+app.post('/addEvent', function(req, res){
+    checkTokenValid(req, res);
+    newEvent = req.body.
+    console.log(req.body)
+    //addEventToDB(req, res, )
+
+
+    res.redirect('/events');
+})
+
+function addEventToDB(req, res, event){
+    var username = getUserFromToken(req, res);
+    var updatedEvents = "";
+    client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
+        updatedEvents = updatedEvents + user.myEvents;
+        updatedEvents = updatedEvents + event;
+    })
+
+    client.db("LFTU").collection("users".updateOne)({username: username}, { $set: updatedEvents})
+}
+
 ///////////////////////////////////////// SETTINGS //////////////////////////////////
 
 var settingsRouter = express.Router();
@@ -441,7 +463,29 @@ function createExpiredToken(req, res){
 }
 
 
+function getUserFromToken(req, res){
+    const token = req.cookies.token
 
+    if(!token){
+        res.redirect('/unauthorised')
+        return res.status(401).end()
+
+        var payload
+
+        try{
+            payload = jwt.verify(token, jwtKey)
+        }catch (e){
+            if(e instanceof jwt.JsonWebTokenError){
+                res.send('Credentials invalid')
+                return res.status(401).end()
+            }
+            res.send(res.send('Other issue accessing token'))
+            return res.status(400).end()
+        }
+    }
+    var payload = jwt.verify(token, jwtKey);
+    return payload.username
+}
 
 
 
