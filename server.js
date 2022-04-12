@@ -312,7 +312,7 @@ app.post('/addEvent', async function(req, res){
     //allEvents = newEvent + previous;
     //console.log('1 Body contains' + req.body.myEvents)
     const updatedEvents = await addEventToDB(req, res, newEvent);
-    //console.log('4 All events in main code = ' + allEvents)
+    console.log('4 All events in main code = ' + updatedEvents)
     await updateEventByName(client, username, {myEvents: updatedEvents});
 
     res.redirect('/events');
