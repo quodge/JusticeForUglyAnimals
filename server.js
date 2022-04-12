@@ -302,20 +302,20 @@ eventsRouter.get('/', async function(req, res){
     var event;
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         if(user.myEvents != null && user.myEvent != ""){
-            const eventDB = user.myEvents
-        event = "Events signed up to:  \"" + eventDB + "\""
+            const eventDB = user.myEvents.toString();
+            event = "Events signed up to:  \"" + eventDB + "\""
         
-        console.log(" in loop" + event)
-        res.render('pages/Events', {
-            myEvent:event
+            console.log(" in loop" + event)
+            res.render('pages/Events', {
+                myEvent:event
         })
     }
         else{
             (res.render('pages/Events'))
         }
     
-    console.log("out loop" + event)
-
+    //console.log("out loop" + event)
+    })
         
     
 
@@ -323,7 +323,9 @@ eventsRouter.get('/', async function(req, res){
       //  event: event
    // })
 });
+
 app.use('/events', eventsRouter);
+
 
 
 app.post('/addEvent', async function(req, res){
