@@ -279,8 +279,11 @@ eventsRouter.get('/', async function(req, res){
     checkTokenValid(req, res);
     var username = getUserFromToken(req, res);
     var event = 'You have not yet signed up for an event';
+    console.log(event)
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         event = "You have signed up for the event \"" + user.myEvents + "\"";
+        console.log(event);
+        
     })
 
     res.render('pages/Events', {
