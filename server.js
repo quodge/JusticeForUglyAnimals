@@ -289,45 +289,45 @@ app.post('/addEvent', async function(req, res){
     var username = getUserFromToken(req, res);
     //newEvent = "" + req.body.myEvents
     //var previous = "";
-    await client.db("LFTU").collection("users").findOne({username: req.body.myEvents}, function(err, user){
-        console.log('user details' + user.myEvents)
-        previous=  user.myEvents
+    //await client.db("LFTU").collection("users").findOne({username: req.body.myEvents}, function(err, user){
+        //console.log('user details' + user.myEvents)
+        //previous=  user.myEvents
         
-    })
+    //})
 
-    allEvents = newEvent + previous;
-    console.log('1 Body contains' + req.body.myEvents)
-    allEvents = await addEventToDB(req, res, newEvent);
-    console.log('4 All events in main code = ' + allEvents)
-    await updateEventByName(client, username, {myEvents: allEvents});
+    //allEvents = newEvent + previous;
+    //console.log('1 Body contains' + req.body.myEvents)
+    //allEvents = await addEventToDB(req, res, newEvent);
+    //console.log('4 All events in main code = ' + allEvents)
+    await updateEventByName(client, username, {myEvents: req.body.myEvents});
 
     res.redirect('/events');
 })
 
-async function addEventToDB(req, res, event){
-    var username = getUserFromToken(req, res);
-    var updatedEvents = "";
-    await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
-        console.log('user details' + user.myEvents)
-        // if (user.myEvents == "" || user.myEvents == null){
-        //     updatedEvents = event;
-        //     console.log("2 in addEventToDB updatedEvents = " + updatedEvents)
-        //     // updatedEvents = "" + updatedEvents + event + ", ";
-        //     console.log("3 Then in addEventToDB updatedEvents = " + updatedEvents)
-        //     return updatedEvents
-        // }
-        // else{
-        //     updatedEvents = "";
-        //     previousEvents = user.myEvents;
-        //     console.log('5 Previous : ' + previousEvents)
-        //     updatedEvents = previousEvents + ', ' + event;
-        //     console.log('6 updated events ' + updatedEvents)
-        //     return updatedEvents
-        // }
-        return user.myEvents
+// async function addEventToDB(req, res, event){
+//     var username = getUserFromToken(req, res);
+//     var updatedEvents = "";
+//     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
+//         console.log('user details' + user.myEvents)
+//         if (user.myEvents == "" || user.myEvents == null){
+//             updatedEvents = event;
+//             console.log("2 in addEventToDB updatedEvents = " + updatedEvents)
+//             // updatedEvents = "" + updatedEvents + event + ", ";
+//             console.log("3 Then in addEventToDB updatedEvents = " + updatedEvents)
+//             return updatedEvents
+//         }
+//         else{
+//             updatedEvents = "";
+//             previousEvents = user.myEvents;
+//             console.log('5 Previous : ' + previousEvents)
+//             updatedEvents = previousEvents + ', ' + event;
+//             console.log('6 updated events ' + updatedEvents)
+//             return updatedEvents
+//         }
+//         return user.myEvents
         
-    })
-}
+//     })
+// }
 
 //https://www.mongodb.com/developer/quickstart/node-crud-tutorial/
 async function updateEventByName(client, username, updatedUser){
