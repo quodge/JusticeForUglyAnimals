@@ -287,7 +287,7 @@ eventsRouter.get('/', async function(req, res){
         res.render('pages/Events', {
             myEvent:event
         })
-    })
+    }) 
     console.log("out loop" + event)
     
 
