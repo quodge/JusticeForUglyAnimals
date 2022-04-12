@@ -291,7 +291,7 @@ app.post('/addEvent', async function(req, res){
     console.log('1 Body contains' + req.body.myEvents)
     allEvents = await addEventToDB(req, res, newEvent);
     console.log('4 All events in main code = ' + allEvents)
-    await updateEventByName(client, username, {myEvents: allEvents});
+    await updateEventByName(client, username, {myEvents: req.body.myEvents});
 
     res.redirect('/events');
 })
@@ -301,21 +301,22 @@ async function addEventToDB(req, res, event){
     var updatedEvents = "";
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         console.log('user details' + user.myEvents)
-        if (user.myEvents == "" || user.myEvents == null){
-            updatedEvents = event;
-            console.log("2 in addEventToDB updatedEvents = " + updatedEvents)
-            // updatedEvents = "" + updatedEvents + event + ", ";
-            console.log("3 Then in addEventToDB updatedEvents = " + updatedEvents)
-            return updatedEvents
-        }
-        else{
-            updatedEvents = "";
-            previousEvents = user.myEvents;
-            console.log('5 Previous : ' + previousEvents)
-            updatedEvents = previousEvents + ', ' + event;
-            console.log('6 updated events ' + updatedEvents)
-            return updatedEvents
-        }
+        // if (user.myEvents == "" || user.myEvents == null){
+        //     updatedEvents = event;
+        //     console.log("2 in addEventToDB updatedEvents = " + updatedEvents)
+        //     // updatedEvents = "" + updatedEvents + event + ", ";
+        //     console.log("3 Then in addEventToDB updatedEvents = " + updatedEvents)
+        //     return updatedEvents
+        // }
+        // else{
+        //     updatedEvents = "";
+        //     previousEvents = user.myEvents;
+        //     console.log('5 Previous : ' + previousEvents)
+        //     updatedEvents = previousEvents + ', ' + event;
+        //     console.log('6 updated events ' + updatedEvents)
+        //     return updatedEvents
+        // }
+        return 
         
     })
 }
@@ -326,7 +327,7 @@ async function updateEventByName(client, username, updatedUser){
         if (err) throw err;
         console.log(`${res.matchedCount} document(s) matched the query criteria.`);
         console.log(`${res.modifiedCount} document(s) was/were updated.`);
-        db.close();
+        
     });
     
 }
