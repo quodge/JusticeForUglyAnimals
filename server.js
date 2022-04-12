@@ -84,7 +84,9 @@ app.get('/login', function(req, res) {
 app.post('/login', (req, res) => {
     var loginDetails = req.body;
     var message = "";
-    client.db("LFTU").collection("users").findOne({username: loginDetails.username}, function(err, user){
+    var thisUsername = req.body.username;
+    thisUsername.toLowerCase();
+    client.db("LFTU").collection("users").findOne({username: thisUsername}, function(err, user){
         if(user == undefined){
             message = "Username not found";
             res.render('pages/login', {
