@@ -277,9 +277,15 @@ app.post('/comments' , (req, res) => {
 var eventsRouter = express.Router();
 eventsRouter.get('/', function(req, res){
     checkTokenValid(req, res);
+    var username = getUserFromToken(req, res);
+    var event;
+    await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
+        event = user.myEvents;
+    })
 
-
-    res.render('pages/Events')
+    res.render('pages/Events', {
+        event: event
+    })
 });
 app.use('/events', eventsRouter);
 
