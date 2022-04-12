@@ -454,7 +454,8 @@ function checkUserIsAdmin(req, res){
                 expiresIn: jwtExpirySeconds,
             })
         }
-        if (payload.username != 'AdminLFTU'){
+        adminUser = process.env.ADMIN_USER
+        if (payload.username != adminUser){
             res.redirect('/unauthorised')
         }
     }
