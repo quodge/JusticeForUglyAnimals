@@ -273,12 +273,16 @@ app.post('/comments' , (req, res) => {
 
 
 ///////////////////////////////////////// EVENTS ////////////////////////////////
-var event = "You have not yet signed up for an event";
+
 var eventsRouter = express.Router();
 eventsRouter.get('/', async function(req, res){
     checkTokenValid(req, res);
     var username = getUserFromToken(req, res);
-    
+    var event = "You have not yet signed up for an event";
+    await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
+        event = "You have signed up for the event \"" + event + "\""
+        console.log(event)
+    })
     console.log(event)
     
 
