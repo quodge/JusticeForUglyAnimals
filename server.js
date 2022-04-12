@@ -280,7 +280,7 @@ eventsRouter.get('/', async function(req, res){
     var username = getUserFromToken(req, res);
     var event;
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
-        event = "You have signed up for the event \"" + event + "\""
+        event = "You have signed up for the event \"" + user.myEventsevent + "\""
         console.log(" in loop" + event)
         res.render('pages/Events', {
             event:event
