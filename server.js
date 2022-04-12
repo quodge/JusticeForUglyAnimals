@@ -322,7 +322,7 @@ async function addEventToDB(req, res, event){
     var username = getUserFromToken(req, res);
 //     var updatedEvents = "";
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
-        event = "You have signed up for the event \"" + event + "\""
+        event = "Events signed up to:  \"" + event + "\""
         console.log(event)
 //         console.log('user details' + user.myEvents)
 //         if (user.myEvents == "" || user.myEvents == null){
