@@ -300,6 +300,7 @@ async function addEventToDB(req, res, event){
     var username = getUserFromToken(req, res);
     var updatedEvents = "";
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
+        console.log('user details' + user.myEvents)
         if (user.myEvents != ""){
             updatedEvents = user.myEvents ;
             console.log("in addEventToDB updatedEvents = " + updatedEvents)
@@ -318,7 +319,7 @@ async function addEventToDB(req, res, event){
 
 //https://www.mongodb.com/developer/quickstart/node-crud-tutorial/
 async function updateEventByName(client, username, updatedUser){
-    const result = await client.db("LFTU").collection("users").updateOne({username: username }, {$set: updatedUser}, function(err, res){
+    client.db("LFTU").collection("users").updateOne({username: username }, {$set: myupdatedUser}, function(err, res){
         if (err) throw err;
         console.log(`${result.matchedCount} document(s) matched the query criteria.`);
         console.log(`${result.modifiedCount} document(s) was/were updated.`);
