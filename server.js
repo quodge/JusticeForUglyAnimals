@@ -300,11 +300,11 @@ app.use('/events', eventsRouter);
 
 app.post('/addEvent', function(req, res){
     checkTokenValid(req, res);
-    //newEvent = req.body
-    console.log('Body contains' + req.body.myEvents)
-    //addEventToDB(req, res, )
+    newEvent = req.body.myEvents
+    //console.log('Body contains' + req.body.myEvents)
+    addEventToDB(req, res, newEvent);
 
-
+    
     res.redirect('/events');
 })
 
@@ -312,8 +312,8 @@ function addEventToDB(req, res, event){
     var username = getUserFromToken(req, res);
     var updatedEvents = "";
     client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
-        updatedEvents = updatedEvents + user.myEvents;
-        updatedEvents = updatedEvents + event;
+        updatedEvents = updatedEvents + user.myEvents ;
+        updatedEvents = updatedEvents + event + ", ";
     })
 
     client.db("LFTU").collection("users".updateOne)({username: username}, { $set: updatedEvents})
