@@ -301,14 +301,16 @@ async function addEventToDB(req, res, event){
     var updatedEvents = "";
     await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         if (user.myEvents != ""){
-            updatedEvents = "" + updatedEvents + user.myEvents ;
+            updatedEvents = user.myEvents ;
             console.log("in addEventToDB updatedEvents = " + updatedEvents)
-            updatedEvents = "" + updatedEvents + event + ", ";
+            // updatedEvents = "" + updatedEvents + event + ", ";
             console.log("Then in addEventToDB updatedEvents = " + updatedEvents)
             return updatedEvents
         }
         else{
-            return event
+            updatedEvents = "";
+            updatedEvents = user.myEvents + event
+            return updatedEvents
         }
         
     })
