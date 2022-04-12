@@ -168,6 +168,8 @@ app.post('/register' , async (req, res) => {
         } else{
             //regData = regData + 'myEvents: [""]';
             // https://www.npmjs.com/package/bcryptjs to find bcryptjs
+            // if(regData.password != )
+
             bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(regData.password, salt, function(err, hash){
                 regData.password = hash;
