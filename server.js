@@ -298,12 +298,13 @@ eventsRouter.get('/', function(req, res){
 app.use('/events', eventsRouter);
 
 
-app.post('/addEvent', function(req, res){
+app.post('/addEvent', async function(req, res){
     checkTokenValid(req, res);
+    var username = getUserFromToken(req, res);
     newEvent = req.body.myEvents
     //console.log('Body contains' + req.body.myEvents)
-    addEventToDB(req, res, newEvent);
-
+    allEvents = addEventToDB(req, res, newEvent);
+    await updateEventByName(client, username, {myEvents: allEvents});
 
     res.redirect('/events');
 })
@@ -314,9 +315,13 @@ function addEventToDB(req, res, event){
     client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         updatedEvents = updatedEvents + user.myEvents ;
         updatedEvents = updatedEvents + event + ", ";
+        return updatedEvents
     })
+}
 
-    client.db("LFTU").collection("users").updateOne({username: username}, { $set: updatedEvents})
+//https://www.mongodb.com/developer/quickstart/node-crud-tutorial/
+async function updateEventByName(client, username, updatedUser){
+    const result = await client.db("LFTU").collection("users").updateOne({username: username }, {$set: updatedUser});
 }
 
 ///////////////////////////////////////// SETTINGS //////////////////////////////////
