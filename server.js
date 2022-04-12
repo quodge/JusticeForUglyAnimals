@@ -305,7 +305,7 @@ app.post('/addEvent', async function(req, res){
     console.log('Body contains' + req.body.myEvents)
     allEvents = await addEventToDB(req, res, newEvent);
     console.log('All events in main code = ' + allEvents)
-    await updateEventByName(client, username, allEvents);
+    await updateEventByName(client, username, {myEvents: allEvents});
 
     res.redirect('/events');
 })
@@ -330,7 +330,7 @@ function addEventToDB(req, res, event){
 
 //https://www.mongodb.com/developer/quickstart/node-crud-tutorial/
 async function updateEventByName(client, username, updatedUser){
-    const result = await client.db("LFTU").collection("users").updateOne({username: username }, {$myEvents: updatedUser});
+    const result = await client.db("LFTU").collection("users").save({username: username }, {$set: updatedUser});
     console.log(`${result.matchedCount} document(s) matched the query criteria.`);
     console.log(`${result.modifiedCount} document(s) was/were updated.`);
 }
