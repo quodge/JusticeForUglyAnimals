@@ -510,8 +510,8 @@ function checkUserIsAdmin(req, res){
                 expiresIn: jwtExpirySeconds,
             })
         }
-        
-        if (payload.username != "adminlftu"){
+        var checkuser = payload.username.toLowerCase()
+        if (checkuser != "adminlftu"){
             res.redirect('/unauthorised') 
         }
     }
