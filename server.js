@@ -303,7 +303,7 @@ app.post('/addEvent', async function(req, res){
     var username = getUserFromToken(req, res);
     newEvent = "" + req.body.myEvents
     console.log('Body contains' + req.body.myEvents)
-    allEvents = addEventToDB(req, res, newEvent);
+    allEvents = await addEventToDB(req, res, newEvent);
     console.log('All events in main code = ' + allEvents)
     await updateEventByName(client, username, {myEvents: allEvents});
 
