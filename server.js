@@ -288,10 +288,17 @@ app.post('/addEvent', async function(req, res){
     checkTokenValid(req, res);
     var username = getUserFromToken(req, res);
     newEvent = "" + req.body.myEvents
+    await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
+        console.log('user details' + user.myEvents)
+        var previous=  user.myEvents
+        
+    })
+
+    allEvents = newEvent + previous;
     console.log('1 Body contains' + req.body.myEvents)
     allEvents = await addEventToDB(req, res, newEvent);
     console.log('4 All events in main code = ' + allEvents)
-    await updateEventByName(client, username, {myEvents: req.body.myEvents});
+    await updateEventByName(client, username, {myEvents: allEvents});
 
     res.redirect('/events');
 })
@@ -316,7 +323,7 @@ async function addEventToDB(req, res, event){
         //     console.log('6 updated events ' + updatedEvents)
         //     return updatedEvents
         // }
-        return 
+        return user.myEvents
         
     })
 }
