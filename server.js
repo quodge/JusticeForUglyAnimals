@@ -298,21 +298,25 @@ app.post('/comments' , (req, res) => {
 var eventsRouter = express.Router();
 eventsRouter.get('/', async function(req, res){
     checkTokenValid(req, res);
-    var username = getUserFromToken(req, res);
-    var event;
-    await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
-        if(user.myEvents != null && user.myEvent != ""){
-            const eventDB = user.myEvents.toString();
-            event = "Events signed up to:  \"" + "\""
+    var event = "Events signed up to:  \"" + "\""
+    res.render('pages/Events', {
+        myEvent: event
+    })
+    //var username = getUserFromToken(req, res);
+    //var event;
+    //await client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
+    //     if(user.myEvents != null && user.myEvent != ""){
+    //         const eventDB = user.myEvents.toString();
+    //         event = "Events signed up to:  \"" + "\""
         
-            console.log(" in loop" + event)
-            res.render('pages/Events', {
-                myEvent:event
-        })
-    }
-        else{
-            (res.render('pages/Events'))
-        }
+    //         console.log(" in loop" + event)
+    //         res.render('pages/Events', {
+    //             myEvent:event
+    //     })
+    // }
+    //     else{
+    //         (res.render('pages/Events'))
+    //     }
     
     //console.log("out loop" + event)
     })
@@ -322,7 +326,7 @@ eventsRouter.get('/', async function(req, res){
     //res.render('pages/Events', {
       //  event: event
    // })
-});
+// });
 
 app.use('/events', eventsRouter);
 
