@@ -301,9 +301,10 @@ app.use('/events', eventsRouter);
 app.post('/addEvent', async function(req, res){
     checkTokenValid(req, res);
     var username = getUserFromToken(req, res);
-    newEvent = req.body.myEvents
-    //console.log('Body contains' + req.body.myEvents)
+    newEvent = "" + req.body.myEvents
+    console.log('Body contains' + req.body.myEvents)
     allEvents = addEventToDB(req, res, newEvent);
+    console.log('All events in main code = ' + allEvents)
     await updateEventByName(client, username, {myEvents: allEvents});
 
     res.redirect('/events');
@@ -314,7 +315,9 @@ function addEventToDB(req, res, event){
     var updatedEvents = "";
     client.db("LFTU").collection("users").findOne({username: username}, function(err, user){
         updatedEvents = updatedEvents + user.myEvents ;
+        console.log("in addEventToDB updatedEvents = " + updatedEvents)
         updatedEvents = updatedEvents + event + ", ";
+        console.log("Then in addEventToDB updatedEvents = " + updatedEvents)
         return updatedEvents
     })
 }
@@ -322,6 +325,8 @@ function addEventToDB(req, res, event){
 //https://www.mongodb.com/developer/quickstart/node-crud-tutorial/
 async function updateEventByName(client, username, updatedUser){
     const result = await client.db("LFTU").collection("users").updateOne({username: username }, {$set: updatedUser});
+    console.log(`${result.matchedCount} document(s) matched the query criteria.`);
+    console.log(`${result.modifiedCount} document(s) was/were updated.`);
 }
 
 ///////////////////////////////////////// SETTINGS //////////////////////////////////
